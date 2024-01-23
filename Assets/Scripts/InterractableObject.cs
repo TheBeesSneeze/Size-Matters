@@ -1,48 +1,71 @@
 /*******************************************************************************
-* File Name :         InterractableObject.cs
-* Author(s) :         Toby Schamberger
-* Creation Date :     1/22/2024
-*
-* Brief Description : Basic class which stores information about objects which
-* can be picked up and resized.
-* 
-* feel free to change as much code as you want :) 
-* 
-* TODO:
-* - Detect when player is looking at them
-* - outlines with dynamic colors
-* - resizing behaviour
-* - how the fuck do we make the speed of resizing consistent
-* - are we doing weight??? how the fuck do we calculate that
-* - visual/audio effect for when object gets too big/too small
-* - picking up and dropping stuff
-*****************************************************************************/
+ * File Name :         InterractableObject.cs
+ * Author(s) :         Toby Schamberger
+ * Creation Date :     1/22/2024
+ *
+ * Brief Description : Basic class which stores information about objects which
+ * can be picked up and resized.
+ *
+ * feel free to change as much code as you want :)
+ *
+ * TODO:
+ * - Detect when player is looking at them
+ * - outlines with dynamic colors
+ * - resizing behaviour done
+ * - how the fuck do we make the speed of resizing consistent use a smooth dampen
+ * - are we doing weight??? how the fuck do we calculate that use rb mass
+ * - visual/audio effect for when object gets too big/too small
+ * - picking up and dropping stuff done
+ *****************************************************************************/
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class InterractableObject : MonoBehaviour
 {
-    [Header("Settings")]
-
-    [Tooltip("If the object can be picked up, when it is at an appropriate size")]
+    [Header("Settings")] [Tooltip("If the object can be picked up, when it is at an appropriate size")]
     public bool CanBePickedUp = true;
+
     public float MaxPickUpSize = 1.0f;
 
-    [Tooltip("The default size is always 1.")]
-    public float MaxSize = 10f;
-    [Tooltip("The default size is always 1.")]
-    public float MinSize = 0.1f;
+    [Header("Scale Changes")]
+    [Tooltip("The default size is always 1.")] [SerializeField]
+    private float maxScaleMultiplier = 10f;
+    [Tooltip("The default size is always 1.")] [SerializeField]
+    private float minScaleMultiplier = 0.1f;
 
-    [Tooltip("Static variable. Units per second resized")]
-    public static float ResizedSpeed;
+    [SerializeField] [Tooltip("Multiplier so individual objects can grow/shrink faster if desired")]
+    private float scaleChangeRateMultiplier = 1f;
 
-    [Header("Debug")]
-    public float CurrentSize = 1.0f;
 
-    private Coroutine resizingCoroutine;
-    private bool currentlyResizing;
+    [SerializeField] private float scaleChangeSmoothingTime = 0.1f;
+
+    [Header("Debug")] public float CurrentSize = 1.0f; //inv lerp for getting current size.
+
+    private Rigidbody rb;
+    private Vector3 initScale;
+    private Vector3 minScale, maxScale;
+    [ReadOnly] [SerializeField] private Vector3 scaleTarget;
+    private Vector3 scaleDampRef;
+    private float initMass;
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        initScale = transform.localScale;
+        scaleTarget = initScale;
+        initMass = rb.mass;
+    }
+
+    private void FixedUpdate()
+    {
+        //smooths any changes in scale.s
+        transform.localScale = Vector3.SmoothDamp(initScale, scaleTarget, ref scaleDampRef, scaleChangeSmoothingTime);
+    }
 
     /// <summary>
     /// Returns the weight of the object, for pressure plates.
@@ -51,7 +74,7 @@ public class InterractableObject : MonoBehaviour
     public float GetWeight()
     {
         //TODO: how the fuck are we calculating this
-        return -1;
+        return rb.mass;
     }
 
     /// <summary>
@@ -64,66 +87,45 @@ public class InterractableObject : MonoBehaviour
     }
 
     /// <summary>
-    /// Call this function when the player is going to grow something.
+    /// Try to grow or shrink something.
     /// </summary>
-    public void AttemptGrow()
+    /// <param name="rate">How fast and in what direction to grow/shrink.</param>
+    /// <returns></returns>
+    public float GrowOrShrink(float rate)
     {
-        //TODO: add code that checks for the players matter
-
-        if (CurrentSize >= MaxSize)
-        {
-            //TODO: code that changes the outline?
-            return;
-        }
-
-        if(resizingCoroutine != null || currentlyResizing)
-        {
-            StopResizing();
-        }
-
-        currentlyResizing = true;
-        resizingCoroutine = StartCoroutine(GrowObject());
+        minScale = initScale * minScaleMultiplier;
+        maxScale = initScale * maxScaleMultiplier;
+        float change = rate * Time.deltaTime * scaleChangeRateMultiplier;
+        var newScale = scaleTarget;
+        newScale.x = Mathf.Clamp(newScale.x + change, minScale.x,
+            maxScale.x);
+        newScale.y = Mathf.Clamp(newScale.y + change, minScale.y,
+            maxScale.y);
+        newScale.z = Mathf.Clamp(newScale.z + change, minScale.z,
+            maxScale.z);
+        scaleTarget = newScale;
+        rb.mass = initMass * (scaleTarget.magnitude / initScale.magnitude);
+        float prevSize = CurrentSize;
+        CurrentSize = (scaleTarget.magnitude / initScale.magnitude);
+        return prevSize - CurrentSize;
     }
 
-    /// <summary>
-    /// Call this function when the player is going to shrink something.
-    /// </summary>
-    public void AttemptShrink()
+    [Button]
+    private void TEST_Grow()
     {
-        //TODO: add code that checks for the players matter
-
-        if (CurrentSize <= MinSize)
-        {
-            //TODO: code that changes the outline?
-            return;
-        }
-
-        if (resizingCoroutine != null || currentlyResizing)
-        {
-            StopResizing();
-        }
-
-        currentlyResizing = true;
-        resizingCoroutine = StartCoroutine(ShrinkObject());
+        GrowOrShrink(10f);
     }
 
-    /// <summary>
-    /// Same function for growing/shrinking
-    /// </summary>
-    public void StopResizing()
+    [Button]
+    private void TEST_Shrink()
     {
-        if (resizingCoroutine != null)
-        {
-            StopCoroutine(resizingCoroutine);
-            resizingCoroutine = null;
-        }
-
-        currentlyResizing = false;
+        GrowOrShrink(-10f);
     }
+
 
     public void AttemptPickUp()
     {
-        if(CurrentSize > MaxPickUpSize)
+        if (CurrentSize > MaxPickUpSize)
         {
             return;
         }
@@ -139,27 +141,5 @@ public class InterractableObject : MonoBehaviour
     public void DropItem()
     {
         //TODO
-    }
-
-    protected IEnumerator GrowObject()
-    {
-        while(CurrentSize < MaxSize)
-        {
-            //TODO resizing math
-
-            CurrentSize = Mathf.Clamp(CurrentSize, MinSize, MaxSize);
-            yield return null;
-        }
-    }
-
-    protected IEnumerator ShrinkObject()
-    {
-        while (CurrentSize > MinSize)
-        {
-            //TODO resizing math
-
-            CurrentSize = Mathf.Clamp(CurrentSize, MinSize, MaxSize);
-            yield return null;
-        }
     }
 }
