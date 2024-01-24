@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
     [SerializeField] private float lookSensitivity = 50f;
+    [SerializeField] private float pushForce = 30f;
     [SerializeField] private Camera cam;
     private float xMovement;
     private float yMovement;
@@ -64,4 +66,11 @@ public class PlayerController : MonoBehaviour
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.rigidbody != null)
+        {
+            hit.rigidbody.velocity = hit.moveDirection * pushForce;
+        }
+    }
 }
