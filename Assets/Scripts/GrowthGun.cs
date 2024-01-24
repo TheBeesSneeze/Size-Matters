@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * File Name :         GrowthGun.cs
+ * Author(s) :         Alec Pizzifero
+ * Creation Date :     1/22/2024
+ *
+ * Brief Description : 
+ *
+ * TODO:
+ * - 
+ *****************************************************************************/
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,8 +52,8 @@ public class GrowthGun : MonoBehaviour
     {
         bool leftClick = mainControls.StandardLayout.Grow.IsPressed();
         bool rightClick = mainControls.StandardLayout.Shrink.IsPressed();
+
         if (leftClick && rightClick) return; //don't allow both to be pressed at same time.
-        
 
         if (leftClick || rightClick)
         {

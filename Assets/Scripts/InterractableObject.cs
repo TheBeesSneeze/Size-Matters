@@ -73,7 +73,6 @@ public class InterractableObject : MonoBehaviour
     /// <returns></returns>
     public float GetWeight()
     {
-        //TODO: how the fuck are we calculating this
         return rb.mass;
     }
 
