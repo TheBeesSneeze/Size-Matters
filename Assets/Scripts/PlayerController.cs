@@ -18,11 +18,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerSpeed = 2.0f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
-
+    [SerializeField] private float lookSensitivity = 50f;
+    [SerializeField] private Camera cam;
+    private float xMovement;
+    private float yMovement;
+    
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         inputManager = InputManager.Instance;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
@@ -33,14 +39,20 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
-        Vector2 movement = inputManager.GetPlayerMovement();
-        Vector3 move = new Vector3(movement.x, 0f, movement.y);
-        controller.Move(move * Time.deltaTime * playerSpeed);
 
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
+        yMovement += inputManager.GetPlayerLook().y * lookSensitivity * Time.deltaTime;
+        xMovement += inputManager.GetPlayerLook().x * lookSensitivity * Time.deltaTime;
+        yMovement = Mathf.Clamp(yMovement, -90, 90);
+        cam.transform.localEulerAngles = new Vector3(-yMovement, 0f, 0f);
+        transform.eulerAngles = new Vector3(0f, xMovement, 0f);
+
+        Vector2 movement = inputManager.GetPlayerMovement();
+        Vector3 move = transform.TransformDirection(new Vector3(movement.x, 0f, movement.y));
+        controller.Move(move * Time.deltaTime * playerSpeed);
+        // if (move != Vector3.zero)
+        // {
+        //     gameObject.transform.forward = move;
+        // }
 
         // Changes the height position of the player..
         if (inputManager.PlayerJumpedThisFrame() && groundedPlayer)

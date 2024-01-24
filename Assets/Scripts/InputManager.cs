@@ -44,8 +44,23 @@ public class InputManager : MonoBehaviour
         return mainControls.StandardLayout.Movement.ReadValue<Vector2>();
     }
 
+    public Vector2 GetPlayerLook()
+    {
+        return mainControls.StandardLayout.Look.ReadValue<Vector2>();
+    }
+
     public bool PlayerJumpedThisFrame()
     {
-        return mainControls.StandardLayout.Jump.triggered; 
+        return mainControls.StandardLayout.Jump.IsPressed(); 
+    }
+
+    public bool LeftClickPressed()
+    {
+        return mainControls.StandardLayout.Grow.IsPressed();
+    }
+
+    public bool RightClickPressed()
+    {
+        return mainControls.StandardLayout.Shrink.IsPressed();
     }
 }
