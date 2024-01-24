@@ -33,9 +33,9 @@ public class InterractableObject : MonoBehaviour
     public float MaxPickUpSize = 1.0f;
 
     [Header("Scale Changes")]
-    [Tooltip("The default size is always 1.")] [SerializeField]
+    [Tooltip("Initial scale * this value, how big the object can get.")] [SerializeField]
     private float maxScaleMultiplier = 10f;
-    [Tooltip("The default size is always 1.")] [SerializeField]
+    [Tooltip("Initial scale * this value, how small the object can get.")] [SerializeField]
     private float minScaleMultiplier = 0.1f;
 
     [SerializeField] [Tooltip("Multiplier so individual objects can grow/shrink faster if desired")]
