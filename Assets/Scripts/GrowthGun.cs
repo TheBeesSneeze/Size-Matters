@@ -13,9 +13,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UI;
 
 public class GrowthGun : MonoBehaviour
@@ -37,7 +39,7 @@ public class GrowthGun : MonoBehaviour
     private bool useMousePosition;
 
     [SerializeField] private Image growthAmountImage;
-    [SerializeField] private Text growthAmountText;
+    [SerializeField] private TMP_Text growthAmountText;
     [SerializeField] private float startingGrowthJuice = 10f;
     [SerializeField] [ReadOnly] private float currentGrowthJuice = 10f;
 
