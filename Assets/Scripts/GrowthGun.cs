@@ -23,8 +23,6 @@ public class GrowthGun : MonoBehaviour
     [SerializeField] [Required("If null, screen center will be used.")]
     private Transform raycastOrigin;
 
-    private MainControls mainControls; //should prolly singleton this.
-
     [SerializeField] [Required("Required for screen raycasting.")]
     private Camera cam;
 
@@ -43,15 +41,13 @@ public class GrowthGun : MonoBehaviour
 
     private void Awake()
     {
-        mainControls = new MainControls();
-        mainControls.Enable();
         currentGrowthJuice = startingGrowthJuice;
     }
 
     private void Update()
     {
-        bool leftClick = mainControls.StandardLayout.Grow.IsPressed();
-        bool rightClick = mainControls.StandardLayout.Shrink.IsPressed();
+        bool leftClick = InputManager.Instance.LeftClickPressed();
+        bool rightClick = InputManager.Instance.RightClickPressed();
 
         if (leftClick && rightClick) return; //don't allow both to be pressed at same time.
 
