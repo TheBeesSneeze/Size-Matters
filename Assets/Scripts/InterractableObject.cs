@@ -52,10 +52,12 @@ public class InterractableObject : MonoBehaviour
     [ReadOnly] [SerializeField] private Vector3 scaleTarget;
     private Vector3 scaleDampRef;
     private float initMass;
+    private OutlineBehavior outline;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        outline = GetComponent<OutlineBehavior>();
         initScale = transform.localScale;
         scaleTarget = initScale;
         initMass = rb.mass;
@@ -77,12 +79,16 @@ public class InterractableObject : MonoBehaviour
     }
 
     /// <summary>
-    /// THIS FUNCTION DOES NOT GET CALLED YET!! ERASE THIS COMMENT WHEN IT DOES
     /// it should run when the player looks at the object tho. shoot a raycast or smth.
     /// </summary>
     public virtual void OnPlayerLooking()
     {
-        //TODO
+        if(outline == null)
+        {
+            Debug.LogWarning("darn man no outline");
+            return;
+        }
+        outline.CorrectOutline();
     }
 
     /// <summary>

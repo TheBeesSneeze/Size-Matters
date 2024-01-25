@@ -22,13 +22,15 @@ using UnityEngine.UI;
 
 public class GrowthGun : MonoBehaviour
 {
+    public static GrowthGun Instance;
+
     [SerializeField] [Required("If null, screen center will be used.")]
     private Transform raycastOrigin;
 
     [SerializeField] [Required("Required for screen raycasting.")]
     private Camera cam;
 
-    [SerializeField] private float maxRaycastDistance = 30f;
+    [SerializeField] public float maxRaycastDistance = 30f;
 
     [SerializeField] [Tooltip("How fast to grow or shrink")]
     private float scaleRate = 10f;
@@ -41,13 +43,32 @@ public class GrowthGun : MonoBehaviour
     [SerializeField] private float startingGrowthJuice = 10f;
     [SerializeField] [ReadOnly] private float currentGrowthJuice = 10f;
 
+    [HideInInspector] public enum ResizingState
+    {
+        Idle,
+        Growing,
+        Shrinking
+    }
+
+    [HideInInspector] public ResizingState ResizeState;
+
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
         currentGrowthJuice = startingGrowthJuice;
     }
 
     private void Update()
     {
+        ResizeState = ResizingState.Idle;
+
         bool leftClick = InputManager.Instance.LeftClickPressed();
         bool rightClick = InputManager.Instance.RightClickPressed();
 
@@ -64,6 +85,16 @@ public class GrowthGun : MonoBehaviour
     /// </summary>
     protected void WhileClicking(bool leftClick, bool rightClick)
     {
+        if (leftClick)
+        {
+            ResizeState = ResizingState.Growing;
+        }
+
+        if (rightClick)
+        {
+            ResizeState = ResizingState.Shrinking;
+        }
+
         float sign = leftClick ? 1f : -1f;
 
         Ray originPoint =
