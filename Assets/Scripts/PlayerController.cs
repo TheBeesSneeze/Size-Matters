@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
         inputManager = InputManager.Instance;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        yMovement = cam.transform.localEulerAngles.x;
+        xMovement = transform.eulerAngles.y;
     }
 
     void Update()

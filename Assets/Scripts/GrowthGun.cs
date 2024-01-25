@@ -41,6 +41,7 @@ public class GrowthGun : MonoBehaviour
     [SerializeField] private Image growthAmountImage;
     [SerializeField] private TMP_Text growthAmountText;
     [SerializeField] private float startingGrowthJuice = 10f;
+    [SerializeField] private float maxGrowthJuice = 10f;
     [SerializeField] [ReadOnly] private float currentGrowthJuice = 10f;
 
     [HideInInspector] public enum ResizingState
@@ -114,13 +115,13 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                if (currentGrowthJuice <= 1.1f && leftClick)
+                if (currentGrowthJuice <= 0.01f && leftClick)
                 {
                     ResizeState = ResizingState.Bounds;
                     return; //no juice and tryna grow
                 }
                 //there is a problem here!!!                     V
-                if (currentGrowthJuice >= startingGrowthJuice + 0.1f && rightClick)
+                if (currentGrowthJuice >= maxGrowthJuice + 0.01f && rightClick)
                 {
                     ResizeState = ResizingState.Bounds;
                     return; //we have juice and we're tryna shrink further, gun is full.
@@ -128,7 +129,7 @@ public class GrowthGun : MonoBehaviour
 
                 float change = interact.GrowOrShrink(sign * scaleRate); //no need for a delta time, we handle it at the object level.
 
-                currentGrowthJuice = Mathf.Clamp(currentGrowthJuice + change, 0f, startingGrowthJuice);
+                currentGrowthJuice = Mathf.Clamp(currentGrowthJuice + change, 0f, maxGrowthJuice);
             }
         }
 
@@ -137,7 +138,7 @@ public class GrowthGun : MonoBehaviour
 
     protected void UpdateGunUI()
     {
-        growthAmountImage.fillAmount = currentGrowthJuice / startingGrowthJuice;
-        growthAmountText.text = ((int)(currentGrowthJuice / startingGrowthJuice * 100)).ToString()+"%";
+        growthAmountImage.fillAmount = currentGrowthJuice / maxGrowthJuice;
+        growthAmountText.text = $"{Mathf.FloorToInt(currentGrowthJuice / maxGrowthJuice * 100)}%";
     }
 }

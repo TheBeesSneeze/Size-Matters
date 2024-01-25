@@ -28,7 +28,7 @@ public class InputManager : MonoBehaviour
     }
 
     private MainControls mainControls;
-
+    private Camera cam;
     private void Awake()
     {
         if (_instance != null && _instance != this)
@@ -42,6 +42,7 @@ public class InputManager : MonoBehaviour
 
         mainControls = new MainControls();
         mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+        cam = Camera.main; 
     }
 
     private void Update()
@@ -54,13 +55,13 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void DetectLookingObject()
     {
-        Transform raycastOrigin = Camera.main.transform;
+        Transform raycastOrigin = cam.transform;
 
-        //thanks alec for letting me steal your code
+        //thanks alec for letting me steal your code 
         Ray originPoint =
             raycastOrigin
                 ? new Ray(raycastOrigin.position, raycastOrigin.forward)
-                : Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                : cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
         if (Physics.Raycast(originPoint, out RaycastHit hit, GrowthGun.Instance.maxRaycastDistance))
         {
