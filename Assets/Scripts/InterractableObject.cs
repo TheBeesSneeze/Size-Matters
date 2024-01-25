@@ -85,10 +85,15 @@ public class InterractableObject : MonoBehaviour
     {
         if(outline == null)
         {
-            Debug.LogWarning("darn man no outline");
+            Debug.LogWarning("no outline? :(");
             return;
         }
         outline.CorrectOutline();
+    }
+
+    public virtual void OnPlayerLookingExit()
+    {
+        outline.StopOutlining();
     }
 
     /// <summary>

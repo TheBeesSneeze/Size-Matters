@@ -47,7 +47,8 @@ public class GrowthGun : MonoBehaviour
     {
         Idle,
         Growing,
-        Shrinking
+        Shrinking,
+        Bounds
     }
 
     [HideInInspector] public ResizingState ResizeState;
@@ -113,8 +114,17 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                if (currentGrowthJuice <= 1.1f && leftClick) return; //no juice and tryna grow
-                if (currentGrowthJuice >= startingGrowthJuice + 0.1f && rightClick) return; //we have juice and we're tryna shrink further, gun is full.
+                if (currentGrowthJuice <= 1.1f && leftClick)
+                {
+                    ResizeState = ResizingState.Bounds;
+                    return; //no juice and tryna grow
+                }
+                //there is a problem here!!!                     V
+                if (currentGrowthJuice >= startingGrowthJuice + 0.1f && rightClick)
+                {
+                    ResizeState = ResizingState.Bounds;
+                    return; //we have juice and we're tryna shrink further, gun is full.
+                }
 
                 float change = interact.GrowOrShrink(sign * scaleRate); //no need for a delta time, we handle it at the object level.
 

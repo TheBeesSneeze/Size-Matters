@@ -33,5 +33,15 @@ public class OutlineBehavior : MonoBehaviour
         {
             outline.OutlineColor = ShrinkColor;
         }
+
+        if (GrowthGun.Instance.ResizeState == GrowthGun.ResizingState.Bounds)
+        {
+            outline.OutlineColor = AtLimitColor;
+        }
+    }
+
+    public void StopOutlining()
+    {
+        outline.OutlineColor = NoLookColor;
     }
 }

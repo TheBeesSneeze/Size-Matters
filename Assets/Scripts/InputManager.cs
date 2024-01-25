@@ -17,6 +17,8 @@ public class InputManager : MonoBehaviour
 {
     private static InputManager _instance;
 
+    private InterractableObject currentlyViewedObject;
+
     public static InputManager Instance
     {
         get
@@ -44,6 +46,14 @@ public class InputManager : MonoBehaviour
 
     private void Update()
     {
+        DetectLookingObject();
+    }
+
+    /// <summary>
+    /// raycasting
+    /// </summary>
+    public void DetectLookingObject()
+    {
         Transform raycastOrigin = Camera.main.transform;
 
         //thanks alec for letting me steal your code
@@ -51,6 +61,7 @@ public class InputManager : MonoBehaviour
             raycastOrigin
                 ? new Ray(raycastOrigin.position, raycastOrigin.forward)
                 : Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
         if (Physics.Raycast(originPoint, out RaycastHit hit, GrowthGun.Instance.maxRaycastDistance))
         {
             if (hit.rigidbody == null) return;
@@ -60,9 +71,22 @@ public class InputManager : MonoBehaviour
                 if (interact == null) return;
 
                 interact.OnPlayerLooking();
+
+                currentlyViewedObject = interact;
+
+                return;
             }
         }
+        
+        if (currentlyViewedObject != null)
+        { 
+            currentlyViewedObject.OnPlayerLookingExit();
+        }
+       
+
+        currentlyViewedObject = null;
     }
+
     private void OnEnable()
     {
         mainControls.Enable();
