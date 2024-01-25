@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
         }
 
         mainControls = new MainControls();
+        mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
     }
 
     private void Update()
