@@ -105,6 +105,7 @@ GameObject:
   - component: {fileID: 6570968697160916172}
   - component: {fileID: 7928415642315366348}
   - component: {fileID: 2586269939447335382}
+  - component: {fileID: 4391986076110024704}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -126,7 +127,7 @@ Transform:
   m_Children:
   - {fileID: 2491600498450484434}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &6570968697160916172
 CharacterController:
@@ -169,7 +170,7 @@ MonoBehaviour:
   playerSpeed: 2
   jumpHeight: 1
   gravityValue: -9.81
-  lookSensitivity: 50
+  lookSensitivity: 10
   cam: {fileID: 5521326927341189067}
 --- !u!114 &2586269939447335382
 MonoBehaviour:
@@ -183,6 +184,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfe60f7ba1cf7d4494dee12eb260ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4391986076110024704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7777369738489023938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740691d0e0a714b48ba3bfb960a0af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxWeight: 100
+  MaxPickupDistance: 10
+  MaxDistanceFromPlayer: 5
+  raycastOrigin: {fileID: 2491600498450484434}
 --- !u!1001 &572346942200629992
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private bool groundedPlayer;
 
-    private InputManager inputManager;
-
+    private InputManager inputManager; //isnt the point of singletons to not have this variable?
     
     [SerializeField] private float playerSpeed = 2.0f;
     [SerializeField] private float jumpHeight = 1.0f;

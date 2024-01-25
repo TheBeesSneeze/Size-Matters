@@ -1,3 +1,14 @@
+/*******************************************************************************
+ * File Name :         InputManager.cs
+ * Author(s) :         
+ * Creation Date :     1/22/2024
+ *
+ * Brief Description : 
+ *
+ * TODO:
+ * - 
+ *****************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +37,7 @@ public class InputManager : MonoBehaviour
         {
             _instance = this;
         }
+
         mainControls = new MainControls();
     }
 
@@ -62,5 +74,10 @@ public class InputManager : MonoBehaviour
     public bool RightClickPressed()
     {
         return mainControls.StandardLayout.Shrink.IsPressed();
+    }
+
+    public bool PickUpPressed()
+    {
+        return mainControls.StandardLayout.Pickup.IsPressed();
     }
 }
