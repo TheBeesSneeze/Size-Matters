@@ -22,13 +22,15 @@ using UnityEngine.UI;
 
 public class GrowthGun : MonoBehaviour
 {
+    public static GrowthGun Instance;
+
     [SerializeField] [Required("If null, screen center will be used.")]
     private Transform raycastOrigin;
 
     [SerializeField] [Required("Required for screen raycasting.")]
     private Camera cam;
 
-    [SerializeField] private float maxRaycastDistance = 30f;
+    [SerializeField] public float maxRaycastDistance = 30f;
 
     [SerializeField] [Tooltip("How fast to grow or shrink")]
     private float scaleRate = 10f;
@@ -41,13 +43,33 @@ public class GrowthGun : MonoBehaviour
     [SerializeField] private float startingGrowthJuice = 10f;
     [SerializeField] [ReadOnly] private float currentGrowthJuice = 10f;
 
+    [HideInInspector] public enum ResizingState
+    {
+        Idle,
+        Growing,
+        Shrinking,
+        Bounds
+    }
+
+    [HideInInspector] public ResizingState ResizeState;
+
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
         currentGrowthJuice = startingGrowthJuice;
     }
 
     private void Update()
     {
+        ResizeState = ResizingState.Idle;
+
         bool leftClick = InputManager.Instance.LeftClickPressed();
         bool rightClick = InputManager.Instance.RightClickPressed();
 
@@ -64,6 +86,16 @@ public class GrowthGun : MonoBehaviour
     /// </summary>
     protected void WhileClicking(bool leftClick, bool rightClick)
     {
+        if (leftClick)
+        {
+            ResizeState = ResizingState.Growing;
+        }
+
+        if (rightClick)
+        {
+            ResizeState = ResizingState.Shrinking;
+        }
+
         float sign = leftClick ? 1f : -1f;
 
         Ray originPoint =
@@ -82,8 +114,17 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                if (currentGrowthJuice <= 1.1f && leftClick) return; //no juice and tryna grow
-                if (currentGrowthJuice >= startingGrowthJuice + 0.1f && rightClick) return; //we have juice and we're tryna shrink further, gun is full.
+                if (currentGrowthJuice <= 1.1f && leftClick)
+                {
+                    ResizeState = ResizingState.Bounds;
+                    return; //no juice and tryna grow
+                }
+                //there is a problem here!!!                     V
+                if (currentGrowthJuice >= startingGrowthJuice + 0.1f && rightClick)
+                {
+                    ResizeState = ResizingState.Bounds;
+                    return; //we have juice and we're tryna shrink further, gun is full.
+                }
 
                 float change = interact.GrowOrShrink(sign * scaleRate); //no need for a delta time, we handle it at the object level.
 
