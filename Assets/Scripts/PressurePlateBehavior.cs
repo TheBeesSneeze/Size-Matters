@@ -6,14 +6,20 @@ using UnityEngine;
 public class PressurePlateBehavior : MonoBehaviour
 {
     float weight = 0f;
-    public bool ExactTargetMode = true;
-    public float minimumDetectableWeight = 0;
-    public float maximumDetectableWeight = 100;
-    public float TargetWeight = 1;
-    public float TargetWeightErrorMargin = 0.1f;
-    public bool triggered = false;
+    public bool ExactTargetMode = true; // True: the pressure plate will only activate if the weight is exactly the target
+                                        // False: the pressure plate will trigger if the weight is equal or above the target
+    
+    public float minimumDetectableWeight = 0; // if the weight is less than this then the pressure plate will not detect it
+    public float maximumDetectableWeight = 100; // the weight the pressure plate can detect cannot exceed this number
+
+    public float TargetWeight = 1; // the target weight
+    public float TargetWeightErrorMargin = 0.1f; // pressure plate will still tigger when the weight is +- this value.
+                                                 // this value is only important when exact target mode is active
+    
+    public bool triggered = false; 
     public GameObject WeightDisplayText;
-    List<InterractableObject> ObjOnPlate = new List<InterractableObject>();
+    
+    List<InterractableObject> ObjOnPlate = new List<InterractableObject>(); //list of objs on pressure plate
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<InterractableObject>() != null) {
