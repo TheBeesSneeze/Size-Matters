@@ -114,7 +114,8 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                if (currentGrowthJuice <= 1.1f && leftClick)
+
+                if (currentGrowthJuice <= 0.1f && leftClick)
                 {
                     ResizeState = ResizingState.Bounds;
                     return; //no juice and tryna grow
