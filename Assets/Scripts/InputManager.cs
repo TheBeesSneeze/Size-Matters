@@ -1,10 +1,23 @@
+/*******************************************************************************
+ * File Name :         InputManager.cs
+ * Author(s) :         
+ * Creation Date :     1/22/2024
+ *
+ * Brief Description : 
+ *
+ * TODO:
+ * - 
+ *****************************************************************************/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    private static InputManager _instance; 
+    private static InputManager _instance;
+
+    private InterractableObject currentlyViewedObject;
 
     public static InputManager Instance
     {
@@ -14,11 +27,11 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private MainControls mainControls;
+    public MainControls mainControls;
 
     private void Awake()
     {
-        if(_instance != null && _instance != this)
+        if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
         }
@@ -26,7 +39,52 @@ public class InputManager : MonoBehaviour
         {
             _instance = this;
         }
+
         mainControls = new MainControls();
+        mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+    }
+
+    private void Update()
+    {
+        DetectLookingObject();
+    }
+
+    /// <summary>
+    /// raycasting
+    /// </summary>
+    public void DetectLookingObject()
+    {
+        Transform raycastOrigin = Camera.main.transform;
+
+        //thanks alec for letting me steal your code
+        Ray originPoint =
+            raycastOrigin
+                ? new Ray(raycastOrigin.position, raycastOrigin.forward)
+                : Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+
+        if (Physics.Raycast(originPoint, out RaycastHit hit, GrowthGun.Instance.maxRaycastDistance))
+        {
+            if (hit.rigidbody == null) return;
+
+            if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
+            {
+                if (interact == null) return;
+
+                interact.OnPlayerLooking();
+
+                currentlyViewedObject = interact;
+
+                return;
+            }
+        }
+        
+        if (currentlyViewedObject != null)
+        { 
+            currentlyViewedObject.OnPlayerLookingExit();
+        }
+       
+
+        currentlyViewedObject = null;
     }
 
     private void OnEnable()
@@ -62,5 +120,10 @@ public class InputManager : MonoBehaviour
     public bool RightClickPressed()
     {
         return mainControls.StandardLayout.Shrink.IsPressed();
+    }
+
+    public bool PickUpPressed()
+    {
+        return mainControls.StandardLayout.Pickup.IsPressed();
     }
 }
