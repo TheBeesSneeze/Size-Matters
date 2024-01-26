@@ -6,13 +6,19 @@
  * Brief Description : Handles the inputs and behaviour for picking up objects
  *
  * TODO:
- * - outline stuff
+ * - outline stuff?
+ * - disable resizing (you cant resize held object but you CAN resize other stuff)
+ * - crosshair icon
+ * - stop rotating velocity when picked up
+ * 
+ * TEST:
  *****************************************************************************/
 
 using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
@@ -38,6 +44,7 @@ public class PickUpController : MonoBehaviour
     [SerializeField] private Transform raycastOrigin;
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
+    private float startingPlayerYRotation, startingObjectYRotation;
 
     private void Awake()
     {
@@ -55,28 +62,17 @@ public class PickUpController : MonoBehaviour
 
     private void Start()
     {
-        /*
-        playerInput = GetComponent<PlayerInput>();
-        PickUp = playerInput.currentActionMap.FindAction("Pickup");
-
-        PickUp.started += pickup_started;
-        */
+        InputManager.Instance.mainControls.StandardLayout.Pickup.started += PickUp_Started;
     }
 
-    private void Update()
+    private void PickUp_Started(InputAction.CallbackContext obj)
     {
-        bool pickup = InputManager.Instance.PickUpPressed();
-
-        if(pickup)
+        if(currentlyHeldObject == null)
         {
-            if (currentlyHeldObject == null)
-            {
-                AttemptPickup();
-                return;
-            }
-            DropObject();
-
+            AttemptPickup();
+            return;
         }
+        DropObject();
     }
 
     private void AttemptPickup()
@@ -109,7 +105,11 @@ public class PickUpController : MonoBehaviour
     {
         currentlyHeldObject = obj;
 
+        startingPlayerYRotation = transform.rotation.eulerAngles.y;
+        startingObjectYRotation = currentlyHeldObject.transform.rotation.eulerAngles.y;
+
         currentlyHeldObject.GetComponent<Collider>().enabled=false;
+        currentlyHeldObject.GetComponent<Rigidbody>().useGravity = false;
 
         //snap object to center of players screen
         StartCoroutine(UpdateObjectPosition());
@@ -117,8 +117,9 @@ public class PickUpController : MonoBehaviour
 
     private void DropObject()
     {
-        currentlyHeldObject = null;
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
+        currentlyHeldObject.GetComponent<Rigidbody>().useGravity = true;
+        currentlyHeldObject = null;
     }
 
     private IEnumerator UpdateObjectPosition()
@@ -129,6 +130,8 @@ public class PickUpController : MonoBehaviour
 
             currentlyHeldObject.transform.position = holdPosition;
 
+            RotateHeldObject();
+
             yield return null;
         }
     }
@@ -137,14 +140,26 @@ public class PickUpController : MonoBehaviour
     {
         Transform origin = Camera.main.transform;
         Ray ray = new Ray(origin.position, origin.forward);
-        Physics.Raycast(ray, out RaycastHit hit, MaxDistanceFromPlayer, NoObjectLM);
+
+        Physics.Raycast(ray, out RaycastHit hit, MaxDistanceFromPlayer);//, NoObjectLM);
 
         if (hit.transform == null)
         {
-            return Camera.main.transform.forward * MaxDistanceFromPlayer;
+            return origin.position + (origin.forward * MaxDistanceFromPlayer);
         }
 
         return hit.point;
+    }
+
+    private void RotateHeldObject()
+    {
+        float difference = transform.rotation.eulerAngles.y - startingPlayerYRotation;
+
+        Vector3 newObjectRotation = currentlyHeldObject.transform.rotation.eulerAngles;
+        newObjectRotation.y= startingObjectYRotation + difference;
+
+        //currentlyHeldObject.transform.rotation.eulerAngles = newObjectRotation;
+        currentlyHeldObject.transform.rotation = Quaternion.Euler(newObjectRotation);
     }
 
     /// <summary>

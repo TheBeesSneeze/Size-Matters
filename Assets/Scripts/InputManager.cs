@@ -25,7 +25,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private MainControls mainControls;
+    public MainControls mainControls;
 
     private void Awake()
     {
