@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PressurePlateBehavior : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class PressurePlateBehavior : MonoBehaviour
     public GameObject WeightDisplayText;
     
     List<InterractableObject> ObjOnPlate = new List<InterractableObject>(); //list of objs on pressure plate
+    public UnityEvent PressurePlateTriggered;
+    public UnityEvent PressurePlateNotTriggered;
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<InterractableObject>() != null) {
@@ -58,20 +61,24 @@ public class PressurePlateBehavior : MonoBehaviour
             weight >= (TargetWeight - TargetWeightErrorMargin))
             {
                 triggered = true;
+                PressurePlateTriggered.Invoke();
             }
             else
             {
                 triggered = false;
+                PressurePlateNotTriggered.Invoke();
             }
         }
         else {
             if (weight >= TargetWeight)
             {
                 triggered = true;
+                PressurePlateTriggered.Invoke();
             }
             else
             {
                 triggered = false;
+                PressurePlateNotTriggered.Invoke();
             }
         }
         if (ExactTargetMode)
