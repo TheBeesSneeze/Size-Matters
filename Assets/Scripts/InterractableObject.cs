@@ -93,7 +93,8 @@ public class InterractableObject : MonoBehaviour
 
     public virtual void OnPlayerLookingExit()
     {
-        outline.StopOutlining();
+        if(outline!= null)
+            outline.StopOutlining();
     }
 
     /// <summary>
