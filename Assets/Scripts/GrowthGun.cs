@@ -82,7 +82,7 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                if (currentGrowthJuice <= 1.1f && leftClick) return; //no juice and tryna grow
+                if (currentGrowthJuice <= 0.1f && leftClick) return; //no juice and tryna grow
                 if (currentGrowthJuice >= startingGrowthJuice + 0.1f && rightClick) return; //we have juice and we're tryna shrink further, gun is full.
 
                 float change = interact.GrowOrShrink(sign * scaleRate); //no need for a delta time, we handle it at the object level.
