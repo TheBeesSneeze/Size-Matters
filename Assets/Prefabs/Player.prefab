@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 7928415642315366348}
   - component: {fileID: 2586269939447335382}
   - component: {fileID: 4391986076110024704}
+  - component: {fileID: 6057954047100544723}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -170,7 +171,8 @@ MonoBehaviour:
   playerSpeed: 2
   jumpHeight: 1
   gravityValue: -9.81
-  lookSensitivity: 10
+  lookSensitivity: 15
+  pushForce: 30
   cam: {fileID: 5521326927341189067}
 --- !u!114 &2586269939447335382
 MonoBehaviour:
@@ -198,7 +200,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxWeight: 100
   MaxPickupDistance: 10
-  MaxDistanceFromPlayer: 5
+  MaxDistanceFromPlayer: 2
+  NoObjectLM:
+    serializedVersion: 2
+    m_Bits: 0
+  raycastOrigin: {fileID: 2491600498450484434}
+--- !u!114 &6057954047100544723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7777369738489023938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 740691d0e0a714b48ba3bfb960a0af8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxWeight: 100
+  MaxPickupDistance: 3
+  MaxDistanceFromPlayer: 1.75
+  NoObjectLM:
+    serializedVersion: 2
+    m_Bits: 8
   raycastOrigin: {fileID: 2491600498450484434}
 --- !u!1001 &572346942200629992
 PrefabInstance:
