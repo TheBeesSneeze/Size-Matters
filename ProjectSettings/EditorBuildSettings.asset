@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ScaleScene.unity
+    guid: 4268f72e2cddb294a8d6044909354169
   m_configObjects: {}
