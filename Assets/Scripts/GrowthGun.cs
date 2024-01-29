@@ -38,6 +38,13 @@ public class GrowthGun : MonoBehaviour
     [SerializeField] [Tooltip("If enabled, the mouse position will be used instead of the center of the screen")]
     private bool useMousePosition;
 
+    [Header("Sound")]
+    [SerializeField] private AudioClip GrowSound;
+    [SerializeField] private AudioClip growLimit; //not implemented
+    [SerializeField] private AudioClip shrinkSound;
+    [SerializeField] private AudioClip shrinkLimit; //not implemented
+    
+
     [SerializeField] private Image growthAmountImage;
     [SerializeField] private TMP_Text growthAmountText;
     [SerializeField] private float startingGrowthJuice = 10f;
@@ -65,6 +72,14 @@ public class GrowthGun : MonoBehaviour
         }
         currentGrowthJuice = startingGrowthJuice;
     }
+
+    private void Start()
+    {
+        InputManager.Instance.Grow.started += Grow_started;
+        InputManager.Instance.Shrink.started += Shrink_started;
+    }
+
+    
 
     private void Update()
     {
@@ -114,7 +129,6 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-
                 if (currentGrowthJuice <= 0.1f && leftClick)
                 {
                     ResizeState = ResizingState.Bounds;
@@ -140,5 +154,17 @@ public class GrowthGun : MonoBehaviour
     {
         growthAmountImage.fillAmount = currentGrowthJuice / startingGrowthJuice;
         growthAmountText.text = ((int)(currentGrowthJuice / startingGrowthJuice * 100)).ToString()+"%";
+    }
+
+    private void Shrink_started(InputAction.CallbackContext obj)
+    {
+        if (shrinkSound == null) return;
+        AudioSource.PlayClipAtPoint(shrinkSound,transform.position);
+    }
+
+    private void Grow_started(InputAction.CallbackContext obj)
+    {
+        if (GrowSound == null) return;
+        AudioSource.PlayClipAtPoint(GrowSound, transform.position);
     }
 }

@@ -12,17 +12,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    [HideInInspector] public InputAction Look;
+    [HideInInspector] public InputAction Grow;
+    [HideInInspector] public InputAction Shrink;
+    [HideInInspector] public InputAction Movement;
+
     private static InputManager _instance;
 
     private InterractableObject currentlyViewedObject;
 
     public static InputManager Instance
     {
-        get { return _instance; }
+        get
+        {
+            return _instance;
+        }
     }
 
     public MainControls mainControls;
@@ -40,10 +48,16 @@ public class InputManager : MonoBehaviour
 
         mainControls = new MainControls();
         mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
-        mainControls.StandardLayout.Restart.performed += context =>
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        };
+
+        
+    }
+
+    private void Start()
+    {
+        Look = mainControls.StandardLayout.Look;
+        Grow = mainControls.StandardLayout.Grow;
+        Shrink = mainControls.StandardLayout.Shrink;
+        Movement = mainControls.StandardLayout.Movement;
     }
 
     private void Update()
@@ -79,12 +93,12 @@ public class InputManager : MonoBehaviour
                 return;
             }
         }
-
+        
         if (currentlyViewedObject != null)
-        {
+        { 
             currentlyViewedObject.OnPlayerLookingExit();
         }
-
+       
 
         currentlyViewedObject = null;
     }
@@ -111,7 +125,7 @@ public class InputManager : MonoBehaviour
 
     public bool PlayerJumpedThisFrame()
     {
-        return mainControls.StandardLayout.Jump.IsPressed();
+        return mainControls.StandardLayout.Jump.IsPressed(); 
     }
 
     public bool LeftClickPressed()

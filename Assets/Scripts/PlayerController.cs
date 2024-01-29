@@ -23,7 +23,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Camera cam;
     private float xMovement;
     private float yMovement;
-    
+
+    [Header("Sounds")]
+    [SerializeField] private AudioClip JumpSound;
+    [SerializeField] private AudioClip WalkingSound;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -32,14 +36,13 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
     }
 
-    void Update()
+    private void Update()
     {
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
         }
-
 
         yMovement += inputManager.GetPlayerLook().y * lookSensitivity * Time.deltaTime;
         xMovement += inputManager.GetPlayerLook().x * lookSensitivity * Time.deltaTime;
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
         // Changes the height position of the player..
         if (inputManager.PlayerJumpedThisFrame() && groundedPlayer)
         {
+            if (JumpSound != null) AudioSource.PlayClipAtPoint(JumpSound, transform.position);
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
         }
 
@@ -72,4 +76,6 @@ public class PlayerController : MonoBehaviour
             hit.rigidbody.velocity = hit.moveDirection * pushForce;
         }
     }
+
+
 }

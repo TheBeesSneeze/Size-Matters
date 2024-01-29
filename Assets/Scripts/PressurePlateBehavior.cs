@@ -23,9 +23,15 @@ public class PressurePlateBehavior : MonoBehaviour
     List<InterractableObject> ObjOnPlate = new List<InterractableObject>(); //list of objs on pressure plate
     public UnityEvent PressurePlateTriggered;
     public UnityEvent PressurePlateNotTriggered;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip pressurePlateActivated; //not implemented
+    [SerializeField] private AudioClip pressurePlateDeactivated; //not implemented
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<InterractableObject>() != null) {
+        if (collision.gameObject.GetComponent<InterractableObject>() != null) 
+        {
             ObjOnPlate.Add(collision.gameObject.GetComponent<InterractableObject>());
         }
         print(weight);
@@ -40,9 +46,11 @@ public class PressurePlateBehavior : MonoBehaviour
     private void Update()
     {
         float temp = 0;
-        for (int i = 0; i < ObjOnPlate.Count; i++) {
+        for (int i = 0; i < ObjOnPlate.Count; i++) 
+        {
             temp += ObjOnPlate[i].GetWeight();
         }
+
         if (weight < minimumDetectableWeight)
         {
             weight = minimumDetectableWeight;
@@ -55,6 +63,7 @@ public class PressurePlateBehavior : MonoBehaviour
         {
             weight = temp;
         }
+
         if (ExactTargetMode)
         {
             if (weight <= (TargetWeight + TargetWeightErrorMargin) &&
@@ -69,7 +78,8 @@ public class PressurePlateBehavior : MonoBehaviour
                 PressurePlateNotTriggered.Invoke();
             }
         }
-        else {
+        else 
+        {
             if (weight >= TargetWeight)
             {
                 triggered = true;

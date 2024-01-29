@@ -93,7 +93,8 @@ public class InterractableObject : MonoBehaviour
 
     public virtual void OnPlayerLookingExit()
     {
-        outline.StopOutlining();
+        if(outline!= null)
+            outline.StopOutlining();
     }
 
     /// <summary>
@@ -130,26 +131,5 @@ public class InterractableObject : MonoBehaviour
     private void TEST_Shrink()
     {
         GrowOrShrink(-10f);
-    }
-
-
-    public void AttemptPickUp()
-    {
-        if (CurrentSize > MaxPickUpSize)
-        {
-            return;
-        }
-
-        PickUpItem();
-    }
-
-    protected virtual void PickUpItem()
-    {
-        //TODO
-    }
-
-    public void DropItem()
-    {
-        //TODO
     }
 }
