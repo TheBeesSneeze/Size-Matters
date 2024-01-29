@@ -38,6 +38,9 @@ public class GrowthGun : MonoBehaviour
     [SerializeField] [Tooltip("If enabled, the mouse position will be used instead of the center of the screen")]
     private bool useMousePosition;
 
+    [Header("Sound")]
+
+
     [SerializeField] private Image growthAmountImage;
     [SerializeField] private TMP_Text growthAmountText;
     [SerializeField] private float startingGrowthJuice = 10f;
