@@ -65,6 +65,7 @@ public class OutlineBehavior : MonoBehaviour
 
     public void StopOutlining()
     {
+        ResetLineRenderer();
         outline.OutlineColor = NoLookColor;
     }
 }
