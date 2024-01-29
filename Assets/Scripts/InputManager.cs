@@ -12,6 +12,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -21,10 +22,7 @@ public class InputManager : MonoBehaviour
 
     public static InputManager Instance
     {
-        get
-        {
-            return _instance;
-        }
+        get { return _instance; }
     }
 
     public MainControls mainControls;
@@ -42,6 +40,10 @@ public class InputManager : MonoBehaviour
 
         mainControls = new MainControls();
         mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+        mainControls.StandardLayout.Restart.performed += context =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        };
     }
 
     private void Update()
@@ -77,12 +79,12 @@ public class InputManager : MonoBehaviour
                 return;
             }
         }
-        
+
         if (currentlyViewedObject != null)
-        { 
+        {
             currentlyViewedObject.OnPlayerLookingExit();
         }
-       
+
 
         currentlyViewedObject = null;
     }
@@ -109,7 +111,7 @@ public class InputManager : MonoBehaviour
 
     public bool PlayerJumpedThisFrame()
     {
-        return mainControls.StandardLayout.Jump.IsPressed(); 
+        return mainControls.StandardLayout.Jump.IsPressed();
     }
 
     public bool LeftClickPressed()
