@@ -89,6 +89,15 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""48838180-a09d-41ff-8476-c7d65c34b979"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -212,6 +221,17 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4b741f42-63a1-48f4-869b-d884db3566f5"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -233,6 +253,7 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
         m_StandardLayout_Look = m_StandardLayout.FindAction("Look", throwIfNotFound: true);
         m_StandardLayout_Quit = m_StandardLayout.FindAction("Quit", throwIfNotFound: true);
         m_StandardLayout_Pickup = m_StandardLayout.FindAction("Pickup", throwIfNotFound: true);
+        m_StandardLayout_Restart = m_StandardLayout.FindAction("Restart", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -301,6 +322,7 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_StandardLayout_Look;
     private readonly InputAction m_StandardLayout_Quit;
     private readonly InputAction m_StandardLayout_Pickup;
+    private readonly InputAction m_StandardLayout_Restart;
     public struct StandardLayoutActions
     {
         private @MainControls m_Wrapper;
@@ -312,6 +334,7 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_StandardLayout_Look;
         public InputAction @Quit => m_Wrapper.m_StandardLayout_Quit;
         public InputAction @Pickup => m_Wrapper.m_StandardLayout_Pickup;
+        public InputAction @Restart => m_Wrapper.m_StandardLayout_Restart;
         public InputActionMap Get() { return m_Wrapper.m_StandardLayout; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -342,6 +365,9 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
             @Pickup.started += instance.OnPickup;
             @Pickup.performed += instance.OnPickup;
             @Pickup.canceled += instance.OnPickup;
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
         }
 
         private void UnregisterCallbacks(IStandardLayoutActions instance)
@@ -367,6 +393,9 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
             @Pickup.started -= instance.OnPickup;
             @Pickup.performed -= instance.OnPickup;
             @Pickup.canceled -= instance.OnPickup;
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
         }
 
         public void RemoveCallbacks(IStandardLayoutActions instance)
@@ -402,5 +431,6 @@ public partial class @MainControls: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnQuit(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
+        void OnRestart(InputAction.CallbackContext context);
     }
 }
