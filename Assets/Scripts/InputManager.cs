@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -51,7 +52,10 @@ public class InputManager : MonoBehaviour
 
         mainControls = new MainControls();
         mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
-
+        mainControls.StandardLayout.Restart.performed += context =>
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        };
         
     }
 

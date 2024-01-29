@@ -172,9 +172,11 @@ MonoBehaviour:
   playerSpeed: 2
   jumpHeight: 0.5
   gravityValue: -9.81
-  lookSensitivity: 15
+  lookSensitivity: 25
   pushForce: 2
   cam: {fileID: 5521326927341189067}
+  JumpSound: {fileID: 0}
+  WalkingSound: {fileID: 0}
 --- !u!114 &2586269939447335382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +189,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bfe60f7ba1cf7d4494dee12eb260ecf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Look:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Grow:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Shrink:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Movement:
+    m_Name: 
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &6057954047100544723
 MonoBehaviour:
   m_ObjectHideFlags: 0

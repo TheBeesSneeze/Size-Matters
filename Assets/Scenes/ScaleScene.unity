@@ -1497,7 +1497,7 @@ MonoBehaviour:
 
     Restart: R
 
-    Quit: Q
+    Quit: Escape
 
 '
   m_isRightToLeft: 0
