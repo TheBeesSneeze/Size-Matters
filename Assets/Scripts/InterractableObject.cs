@@ -38,9 +38,12 @@ public class InterractableObject : MonoBehaviour
     [Tooltip("Initial scale * this value, how small the object can get.")] [SerializeField]
     private float minScaleMultiplier = 0.1f;
 
+    [Tooltip("False: object can't shrink in _ direction")] [SerializeField] private bool scaleX = true, scaleY = true, scaleZ = true;
+    //[Tooltip("False: object can't shrink in y directions")] [SerializeField] private bool scaleY = true;
+    //[Tooltip("False: object can't shrink in z directions")] [SerializeField] private bool scaleZ = true;
+
     [SerializeField] [Tooltip("Multiplier so individual objects can grow/shrink faster if desired")]
     private float scaleChangeRateMultiplier = 1f;
-
 
     [SerializeField] private float scaleChangeSmoothingTime = 0.1f;
 
@@ -61,6 +64,8 @@ public class InterractableObject : MonoBehaviour
         initScale = transform.localScale;
         scaleTarget = initScale;
         initMass = rb.mass;
+
+        SetBoundingScales();
     }
 
     private void FixedUpdate()
@@ -104,8 +109,8 @@ public class InterractableObject : MonoBehaviour
     /// <returns></returns>
     public float GrowOrShrink(float rate)
     {
-        minScale = initScale * minScaleMultiplier;
-        maxScale = initScale * maxScaleMultiplier;
+        SetBoundingScales();
+
         float change = rate * Time.deltaTime * scaleChangeRateMultiplier;
         var newScale = scaleTarget;
         newScale.x = Mathf.Clamp(newScale.x + change, minScale.x,
@@ -115,7 +120,10 @@ public class InterractableObject : MonoBehaviour
         newScale.z = Mathf.Clamp(newScale.z + change, minScale.z,
             maxScale.z);
         scaleTarget = newScale;
-        rb.mass = initMass * (scaleTarget.magnitude / initScale.magnitude);
+
+        if(rb != null)
+            rb.mass = initMass * (scaleTarget.magnitude / initScale.magnitude);
+
         float prevSize = CurrentSize;
         CurrentSize = (scaleTarget.magnitude / initScale.magnitude);
         return prevSize - CurrentSize;
@@ -124,12 +132,24 @@ public class InterractableObject : MonoBehaviour
     [Button]
     private void TEST_Grow()
     {
+        //SetBoundingScales();
         GrowOrShrink(10f);
     }
 
     [Button]
     private void TEST_Shrink()
     {
+        //SetBoundingScales();
         GrowOrShrink(-10f);
+    }
+
+    private void SetBoundingScales()
+    {
+        minScale = initScale * minScaleMultiplier;
+        maxScale = initScale * maxScaleMultiplier;
+
+        if (!scaleX) { minScale.x = initScale.x; maxScale.x = initScale.x; }
+        if (!scaleY) { minScale.y = initScale.y; maxScale.y = initScale.y; }
+        if (!scaleZ) { minScale.z = initScale.z; maxScale.z = initScale.z; }
     }
 }

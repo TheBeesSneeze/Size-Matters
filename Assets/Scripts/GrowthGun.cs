@@ -92,7 +92,6 @@ public class GrowthGun : MonoBehaviour
         if (leftClick && rightClick) return; //don't allow both to be pressed at same time.
 
         if (!(leftClick || rightClick)) return;
-
         
         WhileClicking(leftClick, rightClick);
     }
@@ -130,13 +129,14 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                if (currentGrowthJuice <= 0.1f && leftClick)
+                float magic_number = 0f; //0.01f
+                if (currentGrowthJuice <= magic_number && leftClick)
                 {
                     ResizeState = ResizingState.Bounds;
                     return; //no juice and tryna grow
                 }
                 //there is a problem here!!!                     V
-                if (currentGrowthJuice >= startingGrowthJuice + 0.1f && rightClick)
+                if (currentGrowthJuice >= startingGrowthJuice + magic_number && rightClick)
                 {
                     ResizeState = ResizingState.Bounds;
                     return; //we have juice and we're tryna shrink further, gun is full.

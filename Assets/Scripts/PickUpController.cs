@@ -36,8 +36,8 @@ public class PickUpController : MonoBehaviour
     [Tooltip("How far the object can be from the player")]
     public float MaxDistanceFromPlayer;
 
-    [Tooltip("true for movement via velocity, false for snapping to raycast point")]
-    [SerializeField] private bool MoveViaPhysics=true; 
+    [Tooltip("true for movement via velocity (good), false for snapping to raycast point(bad")]
+    [SerializeField] private bool MoveViaPhysics=true; //kill your babies
 
     //actions stuff
     //public PlayerInput playerInput;
@@ -45,17 +45,19 @@ public class PickUpController : MonoBehaviour
 
     [SerializeField] private LayerMask NoObjectLM;
     [SerializeField] private Transform raycastOrigin;
+
+    [SerializeField] private float spring = 100;
+    [SerializeField] private float damper = 10;
+
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
     private float startingPlayerYRotation, startingObjectYRotation;
 
     private Rigidbody objectRB;
     private bool CurrentlyHolding;
-
-    [SerializeField] private float spring=100;
-    [SerializeField] private float damper=10;
-
     private Vector3 LastPosition;
+
+    private float maxDistanceForMovement = 0.05f;
 
     private void Awake()
     {
@@ -168,14 +170,23 @@ public class PickUpController : MonoBehaviour
 
         holdPosition = GetHoldPoint();
 
+        if(Vector3.Distance(holdPosition, currentlyHeldObject.transform.position) <= maxDistanceForMovement)
+        {
+            currentlyHeldObject.transform.position = holdPosition;
+            objectRB.velocity = Vector3.zero;
+            return;
+        }
+
         Vector3 direction = holdPosition - currentlyHeldObject.transform.position;
 
         direction = direction.normalized * spring;
 
         Vector3 targetPosition = (holdPosition - LastPosition) / Time.fixedDeltaTime;
-        Vector3 Damper = targetPosition - objectRB.velocity;
+        Vector3 Damper = (targetPosition - objectRB.velocity) * damper;
 
-        objectRB.AddForce(direction + (Damper * damper), ForceMode.Acceleration);
+        Vector3 force = direction + Damper;
+
+        objectRB.AddForce(force, ForceMode.Acceleration);
 
         LastPosition = holdPosition;
 
