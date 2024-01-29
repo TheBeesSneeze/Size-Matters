@@ -42,6 +42,7 @@ public class GrowthGun : MonoBehaviour
     [SerializeField] private TMP_Text growthAmountText;
     [SerializeField] private float startingGrowthJuice = 10f;
     [SerializeField] [ReadOnly] private float currentGrowthJuice = 10f;
+    [field:SerializeField] public Transform FirePoint { get; private set; }
 
     [HideInInspector] public enum ResizingState
     {
