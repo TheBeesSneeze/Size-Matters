@@ -622,30 +622,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &563441026 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7777369738489023938, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-  m_PrefabInstance: {fileID: 7646826409917302430}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &563441031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 563441026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 740691d0e0a714b48ba3bfb960a0af8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxWeight: 0
-  MaxPickupDistance: 0
-  MaxDistanceFromPlayer: 0
-  NoObjectLM:
-    serializedVersion: 2
-    m_Bits: 0
-  raycastOrigin: {fileID: 0}
 --- !u!1 &602334670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,6 +1560,8 @@ MonoBehaviour:
   PressurePlateNotTriggered:
     m_PersistentCalls:
       m_Calls: []
+  pressurePlateActivated: {fileID: 0}
+  pressurePlateDeactivated: {fileID: 0}
 --- !u!1 &2102007186
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,6 +1724,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Grow.m_Id
+      value: 03701a5b-fdbd-4879-9b8d-dc2ec82c1dfa
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Look.m_Id
+      value: f736434b-952f-4b24-9ea1-f6f1eaece780
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Grow.m_Name
+      value: Grow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Look.m_Name
+      value: Look
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Shrink.m_Id
+      value: 5addf2f5-febb-4ab6-bfd0-862ede1b6974
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Movement.m_Id
+      value: c1f5adc8-558e-4c48-9ed3-9ebaeac24184
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Shrink.m_Name
+      value: Shrink
+      objectReference: {fileID: 0}
+    - target: {fileID: 2586269939447335382, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: Movement.m_Name
+      value: Movement
+      objectReference: {fileID: 0}
     - target: {fileID: 2807889623892200252, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1810,9 +1820,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7777369738489023938, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 563441031}
     - targetCorrespondingSourceObject: {fileID: 7152997335724982141, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}

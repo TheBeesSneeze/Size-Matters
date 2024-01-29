@@ -16,10 +16,10 @@ using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
-    public InputAction Look;
-    public InputAction Grow;
-    public InputAction Shrink;
-    public InputAction Movement;
+    [HideInInspector] public InputAction Look;
+    [HideInInspector] public InputAction Grow;
+    [HideInInspector] public InputAction Shrink;
+    [HideInInspector] public InputAction Movement;
 
     private static InputManager _instance;
 
