@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 2
-  jumpHeight: 1
+  jumpHeight: 0.5
   gravityValue: -9.81
   lookSensitivity: 15
   pushForce: 2
