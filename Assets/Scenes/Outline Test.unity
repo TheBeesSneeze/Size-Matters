@@ -175,6 +175,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: damper
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: MaxPickupDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: NoObjectLM.m_Bits
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: MaxDistanceFromPlayer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7777369738489023938, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       propertyPath: m_Name
       value: Player
