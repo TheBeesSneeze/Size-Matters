@@ -214,8 +214,9 @@ Transform:
   - {fileID: 4758110455979286231}
   - {fileID: 3953394178013270953}
   - {fileID: 5127550454417517944}
+  - {fileID: 2010988155634990756}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7142471753697378135
 MonoBehaviour:
@@ -238,6 +239,8 @@ MonoBehaviour:
   growthAmountText: {fileID: 0}
   startingGrowthJuice: 10
   currentGrowthJuice: 10
+  <FirePoint>k__BackingField: {fileID: 2010988155634990756}
+  ResizeState: 0
 --- !u!1 &4241876495884956891
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,3 +621,34 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 6816002474265735545}
   m_maskType: 0
+--- !u!1 &8262172926388904295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2010988155634990756}
+  m_Layer: 0
+  m_Name: FirePt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2010988155634990756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8262172926388904295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.185, z: 0.421}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2499860978296896203}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

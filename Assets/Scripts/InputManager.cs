@@ -34,6 +34,7 @@ public class InputManager : MonoBehaviour
     }
 
     public MainControls mainControls;
+    private Camera cam;
 
     private void Awake()
     {
@@ -45,6 +46,8 @@ public class InputManager : MonoBehaviour
         {
             _instance = this;
         }
+        
+        cam = Camera.main;
 
         mainControls = new MainControls();
         mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
@@ -70,7 +73,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void DetectLookingObject()
     {
-        Transform raycastOrigin = Camera.main.transform;
+        Transform raycastOrigin = cam.transform;
 
         //thanks alec for letting me steal your code
         Ray originPoint =
