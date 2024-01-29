@@ -132,25 +132,4 @@ public class InterractableObject : MonoBehaviour
     {
         GrowOrShrink(-10f);
     }
-
-
-    public void AttemptPickUp()
-    {
-        if (CurrentSize > MaxPickUpSize)
-        {
-            return;
-        }
-
-        PickUpItem();
-    }
-
-    protected virtual void PickUpItem()
-    {
-        //TODO
-    }
-
-    public void DropItem()
-    {
-        //TODO
-    }
 }

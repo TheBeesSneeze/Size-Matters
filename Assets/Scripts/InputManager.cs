@@ -12,9 +12,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class InputManager : MonoBehaviour
 {
+    public InputAction Look;
+    public InputAction Grow;
+    public InputAction Shrink;
+    public InputAction Movement;
+
     private static InputManager _instance;
 
     private InterractableObject currentlyViewedObject;
@@ -42,6 +48,16 @@ public class InputManager : MonoBehaviour
 
         mainControls = new MainControls();
         mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+
+        
+    }
+
+    private void Start()
+    {
+        Look = mainControls.StandardLayout.Look;
+        Grow = mainControls.StandardLayout.Grow;
+        Shrink = mainControls.StandardLayout.Shrink;
+        Movement = mainControls.StandardLayout.Movement;
     }
 
     private void Update()
