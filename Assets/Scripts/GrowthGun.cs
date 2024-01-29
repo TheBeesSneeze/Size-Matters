@@ -129,14 +129,13 @@ public class GrowthGun : MonoBehaviour
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                float magic_number = 0f; //0.01f
-                if (currentGrowthJuice <= magic_number && leftClick)
+                if (currentGrowthJuice <= 0.01f && leftClick)
                 {
                     ResizeState = ResizingState.Bounds;
                     return; //no juice and tryna grow
                 }
                 //there is a problem here!!!                     V
-                if (currentGrowthJuice >= startingGrowthJuice + magic_number && rightClick)
+                if (currentGrowthJuice >= startingGrowthJuice + 0.01f && rightClick)
                 {
                     ResizeState = ResizingState.Bounds;
                     return; //we have juice and we're tryna shrink further, gun is full.
