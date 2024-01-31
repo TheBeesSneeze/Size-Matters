@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 241277700085569966}
   - component: {fileID: 7675912476114666917}
   m_Layer: 0
-  m_Name: InteractableObject
+  m_Name: PushableInteractableObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6073f2b416127b408c7a4a77d0f480b, type: 2}
+  - {fileID: 2100000, guid: 8a8888ede19bfe742ac56f1ca6a11af1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
