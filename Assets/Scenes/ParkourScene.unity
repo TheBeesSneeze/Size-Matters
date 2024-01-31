@@ -473,7 +473,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &185162045
 Mesh:
@@ -1611,9 +1611,6 @@ MonoBehaviour:
   GrowColor: {r: 0, g: 0, b: 0, a: 0}
   ShrinkColor: {r: 0, g: 0, b: 0, a: 0}
   AtLimitColor: {r: 0, g: 0, b: 0, a: 0}
-  GrowingSound: {fileID: 0}
-  ShrinkingSound: {fileID: 0}
-  BoundsSound: {fileID: 0}
 --- !u!114 &416450950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1646,6 +1643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanBePickedUp: 1
   CanBePushed: 1
+  NoThrow: 0
   MaxPickUpSize: 1
   maxScaleMultiplier: 10
   minScaleMultiplier: 0.1
@@ -1656,7 +1654,6 @@ MonoBehaviour:
   scaleChangeSmoothingTime: 0.1
   CurrentSize: 1
   scaleTarget: {x: 0, y: 0, z: 0}
-  OnPlate: {fileID: 0}
 --- !u!54 &416450952
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1768,7 +1765,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &420063919
 GameObject:
@@ -3623,7 +3620,6 @@ MonoBehaviour:
   TargetWeightErrorMargin: 0.5
   triggered: 0
   WeightDisplayText: {fileID: 900715457}
-  ObjOnPlate: []
   PressurePlateTriggered:
     m_PersistentCalls:
       m_Calls:
