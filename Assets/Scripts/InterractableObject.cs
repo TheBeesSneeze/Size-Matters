@@ -27,8 +27,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class InterractableObject : MonoBehaviour
 {
-    [Header("Settings")] [Tooltip("If the object can be picked up, when it is at an appropriate size")]
+    [Header("Settings")] 
+    [Tooltip("If the object can be picked up, when it is at an appropriate size")]
     public bool CanBePickedUp = true;
+    [Tooltip("If the object can be pushed by the player. Other forces will still push")]
+    public bool CanBePushed = true;
 
     public float MaxPickUpSize = 1.0f;
 
