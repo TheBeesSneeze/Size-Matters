@@ -59,6 +59,7 @@ public class InterractableObject : MonoBehaviour
     private Vector3 scaleDampRef;
     private float initMass;
     private OutlineBehavior outline;
+    public GameObject OnPlate;
 
     private void Awake()
     {

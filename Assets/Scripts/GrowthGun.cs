@@ -125,9 +125,7 @@ public class GrowthGun : MonoBehaviour
 
         if (Physics.Raycast(originPoint, out RaycastHit hit, maxRaycastDistance))
         {
-            if (hit.rigidbody == null) return;
-
-            if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
+            if (hit.rigidbody && hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
                 if (currentGrowthJuice <= 0.01f && leftClick)
                 {
