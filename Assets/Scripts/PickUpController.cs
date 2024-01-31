@@ -117,8 +117,6 @@ public class PickUpController : MonoBehaviour
     private void PickUpObject(GameObject obj)
     {
         CurrentlyHolding = true;
-
-        currentlyHeldObject = obj;
         currentlyHeldObject = obj.GetComponent<InterractableObject>();
 
         startingPlayerYRotation = transform.rotation.eulerAngles.y;
