@@ -64,6 +64,8 @@ public class InterractableObject : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
         outline = GetComponent<OutlineBehavior>();
         initScale = transform.localScale;
         scaleTarget = initScale;
