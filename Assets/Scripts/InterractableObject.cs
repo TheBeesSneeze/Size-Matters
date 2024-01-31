@@ -32,6 +32,8 @@ public class InterractableObject : MonoBehaviour
     public bool CanBePickedUp = true;
     [Tooltip("If the object can be pushed by the player. Other forces will still push")]
     public bool CanBePushed = true;
+    [Tooltip("If the object can be thrown")]
+    public bool NoThrow;
 
     public float MaxPickUpSize = 1.0f;
 

@@ -150,6 +150,10 @@ public class PickUpController : MonoBehaviour
         objectRB.constraints = RigidbodyConstraints.None;
         objectRB.transform.position = holdPoint.position;
 
+        if (currentlyHeldObject.NoThrow)
+        {
+            objectRB.velocity = Vector3.zero;
+        }
 
         currentlyHeldObject = null;
     }
