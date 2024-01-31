@@ -19,6 +19,7 @@ public class OutlineBehavior : MonoBehaviour
     [Header("Unity")]
     private Outline outline;
     private LineRenderer lineRenderer;
+    private GrowthGun.ResizingState lastState;
     
     public void Start()
     {
@@ -52,7 +53,7 @@ public class OutlineBehavior : MonoBehaviour
             lineRenderer.SetPosition(1, gunPt);
             outline.OutlineColor = GrowColor;
 
-            if (GrowingSound != null)
+            if (GrowingSound != null && lastState != GrowthGun.ResizingState.Growing)
             {
                 AudioSource.PlayClipAtPoint(GrowingSound, transform.position);
             }
@@ -65,7 +66,7 @@ public class OutlineBehavior : MonoBehaviour
             outline.OutlineColor = GrowColor;
             outline.OutlineColor = ShrinkColor;
 
-            if (ShrinkingSound != null)
+            if (ShrinkingSound != null && lastState != GrowthGun.ResizingState.Shrinking)
             {
                 AudioSource.PlayClipAtPoint(ShrinkingSound, transform.position);
             }
@@ -78,11 +79,13 @@ public class OutlineBehavior : MonoBehaviour
             outline.OutlineColor = GrowColor;
             outline.OutlineColor = AtLimitColor;
 
-            if (BoundsSound != null)
+            if (BoundsSound != null && lastState != GrowthGun.ResizingState.Bounds)
             {
                 AudioSource.PlayClipAtPoint(BoundsSound, transform.position);
             }
         }
+
+        lastState = GrowthGun.Instance.ResizeState;
     }
 
     public void StopOutlining()
