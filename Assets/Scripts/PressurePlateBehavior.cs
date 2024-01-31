@@ -20,35 +20,37 @@ public class PressurePlateBehavior : MonoBehaviour
     public bool triggered = false; 
     public GameObject WeightDisplayText;
     
-    public List<GameObject> ObjOnPlate = new List<GameObject>(); //list of objs on pressure plate
+    List<InterractableObject> ObjOnPlate = new List<InterractableObject>(); //list of objs on pressure plate
     public UnityEvent PressurePlateTriggered;
     public UnityEvent PressurePlateNotTriggered;
 
     [Header("Sound")]
     [SerializeField] private AudioClip pressurePlateActivated; //not implemented
     [SerializeField] private AudioClip pressurePlateDeactivated; //not implemented
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<InterractableObject>() != null) 
         {
-            ObjOnPlate.Add(collision.gameObject);
-            collision.gameObject.GetComponent<InterractableObject>().OnPlate = gameObject;
+            ObjOnPlate.Add(collision.gameObject.GetComponent<InterractableObject>());
         }
+        print(weight);
     }
     private void OnCollisionExit(Collision collision)
     {
-        ObjOnPlate.Remove(collision.gameObject); 
-    }
-    public void RemoveObj(GameObject g) {
-         ObjOnPlate.Remove(g);
+        if (collision.gameObject.GetComponent<InterractableObject>() != null)
+        {
+            ObjOnPlate.Remove(collision.gameObject.GetComponent<InterractableObject>());
+        } 
     }
     private void Update()
     {
         float temp = 0;
         for (int i = 0; i < ObjOnPlate.Count; i++) 
         {
-            temp += ObjOnPlate[i].GetComponent<InterractableObject>().GetWeight();
+            temp += ObjOnPlate[i].GetWeight();
         }
+
         if (weight < minimumDetectableWeight)
         {
             weight = minimumDetectableWeight;
