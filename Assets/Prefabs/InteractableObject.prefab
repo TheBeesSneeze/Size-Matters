@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CanBePickedUp: 1
-  CanBePushed: 1
   MaxPickUpSize: 1
   maxScaleMultiplier: 20
   minScaleMultiplier: 0.05
@@ -125,7 +124,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6073f2b416127b408c7a4a77d0f480b, type: 2}
+  - {fileID: 2100000, guid: ec84453bb6f418443be6a08ac6526701, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

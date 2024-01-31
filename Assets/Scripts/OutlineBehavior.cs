@@ -4,22 +4,14 @@ using UnityEngine;
 
 public class OutlineBehavior : MonoBehaviour
 {
-    [Header("Colors")]
     public Color NoLookColor; //todo
     public Color IdleColor;
     public Color GrowColor;
     public Color ShrinkColor;
     public Color AtLimitColor; //todo
 
-    [Header("Sounds")]
-    public AudioClip GrowingSound;
-    public AudioClip ShrinkingSound;
-    public AudioClip BoundsSound;
-
-    [Header("Unity")]
     private Outline outline;
     private LineRenderer lineRenderer;
-    private GrowthGun.ResizingState lastState;
     
     public void Start()
     {
@@ -52,11 +44,6 @@ public class OutlineBehavior : MonoBehaviour
             lineRenderer.SetPosition(0, transform.position);
             lineRenderer.SetPosition(1, gunPt);
             outline.OutlineColor = GrowColor;
-
-            if (GrowingSound != null && lastState != GrowthGun.ResizingState.Growing)
-            {
-                AudioSource.PlayClipAtPoint(GrowingSound, transform.position);
-            }
         }
 
         if (GrowthGun.Instance.ResizeState == GrowthGun.ResizingState.Shrinking)
@@ -65,11 +52,6 @@ public class OutlineBehavior : MonoBehaviour
             lineRenderer.SetPosition(1, gunPt);
             outline.OutlineColor = GrowColor;
             outline.OutlineColor = ShrinkColor;
-
-            if (ShrinkingSound != null && lastState != GrowthGun.ResizingState.Shrinking)
-            {
-                AudioSource.PlayClipAtPoint(ShrinkingSound, transform.position);
-            }
         }
 
         if (GrowthGun.Instance.ResizeState == GrowthGun.ResizingState.Bounds)
@@ -78,14 +60,7 @@ public class OutlineBehavior : MonoBehaviour
             lineRenderer.SetPosition(1, gunPt);
             outline.OutlineColor = GrowColor;
             outline.OutlineColor = AtLimitColor;
-
-            if (BoundsSound != null && lastState != GrowthGun.ResizingState.Bounds)
-            {
-                AudioSource.PlayClipAtPoint(BoundsSound, transform.position);
-            }
         }
-
-        lastState = GrowthGun.Instance.ResizeState;
     }
 
     public void StopOutlining()
