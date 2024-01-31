@@ -73,6 +73,13 @@ public class PlayerController : MonoBehaviour
     {
         if (hit.rigidbody != null)
         {
+            InterractableObject obj = hit.rigidbody.GetComponent<InterractableObject>();
+
+            if(obj)
+            {
+                if(!obj.CanBePushed) return;
+            }
+
             hit.rigidbody.velocity = hit.moveDirection * pushForce;
         }
     }

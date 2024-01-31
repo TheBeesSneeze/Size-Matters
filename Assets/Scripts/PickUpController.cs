@@ -36,15 +36,28 @@ public class PickUpController : MonoBehaviour
     [Tooltip("How far the object can be from the player")]
     public float MaxDistanceFromPlayer;
 
+    [Tooltip("true for movement via velocity (good), false for snapping to raycast point(bad")]
+    [SerializeField] private bool MoveViaPhysics=true; //kill your babies
+
     //actions stuff
     //public PlayerInput playerInput;
     //private InputAction PickUp;
 
     [SerializeField] private LayerMask NoObjectLM;
     [SerializeField] private Transform raycastOrigin;
+
+    [SerializeField] private float spring = 100;
+    [SerializeField] private float damper = 10;
+
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
     private float startingPlayerYRotation, startingObjectYRotation;
+
+    private Rigidbody objectRB;
+    private bool CurrentlyHolding;
+    private Vector3 LastPosition;
+
+    private float maxDistanceForMovement = 0.05f;
 
     private void Awake()
     {
@@ -103,6 +116,9 @@ public class PickUpController : MonoBehaviour
 
     private void PickUpObject(GameObject obj)
     {
+        CurrentlyHolding = true;
+
+        currentlyHeldObject = obj;
         currentlyHeldObject = obj.GetComponent<InterractableObject>();
 
         startingPlayerYRotation = transform.rotation.eulerAngles.y;
@@ -112,22 +128,37 @@ public class PickUpController : MonoBehaviour
         currentlyHeldObject.GetComponent<Rigidbody>().useGravity = false;
         currentlyHeldObject.OnPlate.GetComponent<PressurePlateBehavior>().RemoveObj(obj);
 
+        currentlyHeldObject.transform.gameObject.layer = 2;
+
+        objectRB = currentlyHeldObject.GetComponent<Rigidbody>();
+        objectRB.useGravity = false;
+        objectRB.constraints = RigidbodyConstraints.FreezeRotation;
 
         //snap object to center of players screen
-        StartCoroutine(UpdateObjectPosition());
+
+        if(!MoveViaPhysics)
+            StartCoroutine(UpdateObjectPosition());
     }
 
     private void DropObject()
     {
+        CurrentlyHolding = false;
+
+        currentlyHeldObject.transform.gameObject.layer = 0;
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
-        currentlyHeldObject.GetComponent<Rigidbody>().useGravity = true;
+        objectRB.useGravity = true;
+        objectRB.constraints = RigidbodyConstraints.None;
+
         currentlyHeldObject = null;
+
     }
 
     private IEnumerator UpdateObjectPosition()
-    {
-        while(currentlyHeldObject != null)
+    {     
+        currentlyHeldObject.GetComponent<Collider>().enabled = false;
+        while (currentlyHeldObject != null)
         {
+
             holdPosition = GetHoldPoint();
 
             currentlyHeldObject.transform.position = holdPosition;
@@ -136,6 +167,40 @@ public class PickUpController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!MoveViaPhysics || !CurrentlyHolding) return;
+
+        holdPosition = GetHoldPoint();
+
+        if(Vector3.Distance(holdPosition, currentlyHeldObject.transform.position) <= maxDistanceForMovement)
+        {
+            currentlyHeldObject.transform.position = holdPosition;
+            objectRB.velocity = Vector3.zero;
+            return;
+        }
+
+        Vector3 direction = holdPosition - currentlyHeldObject.transform.position;
+
+        direction = direction.normalized * spring;
+
+        Vector3 targetPosition = (holdPosition - LastPosition) / Time.fixedDeltaTime;
+        Vector3 Damper = (targetPosition - objectRB.velocity) * damper;
+
+        Vector3 force = direction + Damper;
+
+        objectRB.AddForce(force, ForceMode.Acceleration);
+
+        LastPosition = holdPosition;
+
+        //objectRB.velocity = direction.normalized * 10;
+        //objectRB.AddForce(direction.normalized*100);
+
+        //rb.MovePosition(holdPosition);
+
+        RotateHeldObject();
     }
 
     private Vector3 GetHoldPoint()
