@@ -114,22 +114,19 @@ public class PickUpController : MonoBehaviour
 
                 if (interact.GetWeight() > MaxWeight) return;
 
-                PickUpObject(interact.gameObject);
+                PickUpObject(interact);
             }
         }
     }
 
-    private void PickUpObject(GameObject obj)
+    private void PickUpObject(InterractableObject obj)
     {
         CurrentlyHolding = true;
-        currentlyHeldObject = obj.GetComponent<InterractableObject>();
+
+        currentlyHeldObject = obj;
 
         startingPlayerYRotation = transform.rotation.eulerAngles.y;
         startingObjectYRotation = currentlyHeldObject.transform.rotation.eulerAngles.y;
-
-        currentlyHeldObject.GetComponent<Collider>().enabled=false;
-        currentlyHeldObject.GetComponent<Rigidbody>().useGravity = false;
-        currentlyHeldObject.OnPlate.GetComponent<PressurePlateBehavior>().RemoveObj(obj);
 
         currentlyHeldObject.transform.gameObject.layer = 2;
 
