@@ -129,7 +129,13 @@ public class PickUpController : MonoBehaviour
 
         currentlyHeldObject.GetComponent<Collider>().enabled=false;
         currentlyHeldObject.GetComponent<Rigidbody>().useGravity = false;
-        currentlyHeldObject.OnPlate.GetComponent<PressurePlateBehavior>().RemoveObj(obj);
+
+        if(currentlyHeldObject.OnPlate != null)
+        {
+            PressurePlateBehavior ppb = currentlyHeldObject.OnPlate.GetComponent<PressurePlateBehavior>();
+            ppb.RemoveObj(obj);
+        }
+        
 
         currentlyHeldObject.transform.gameObject.layer = 2;
 
