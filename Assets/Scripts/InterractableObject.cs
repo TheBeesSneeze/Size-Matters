@@ -71,14 +71,14 @@ public class InterractableObject : MonoBehaviour
         initScale = transform.localScale;
         scaleTarget = initScale;
         initMass = rb.mass;
-
+        //CurrentSize = transform.localScale.magnitude;
         SetBoundingScales();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        //smooths any changes in scale.s
-        transform.localScale = Vector3.SmoothDamp(initScale, scaleTarget, ref scaleDampRef, scaleChangeSmoothingTime);
+        //smooths any changes in scale.
+        transform.localScale = Vector3.SmoothDamp(transform.localScale, scaleTarget, ref scaleDampRef, scaleChangeSmoothingTime);
     }
 
     /// <summary>

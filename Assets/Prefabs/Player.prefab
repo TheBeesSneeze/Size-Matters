@@ -285,12 +285,6 @@ MonoBehaviour:
     mass: 0
     dt: 0
     kd: 0
-  torquePD:
-    inertiaTensor: {x: 0, y: 0, z: 0}
-    body_intertiaTensorRotation_dyn: {x: 0, y: 0, z: 0, w: 0}
-    dt: 0
-    kp: 0
-    kd: 0
   holdPoint: {fileID: 3981871118946105532}
 --- !u!1 &7845973415420447653
 GameObject:
@@ -455,6 +449,10 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 5521326927341189067}
+    - target: {fileID: 7142471753697378135, guid: 2c93d9c6786bed04b9973f0de5003533, type: 3}
+      propertyPath: scaleRate
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7142471753697378135, guid: 2c93d9c6786bed04b9973f0de5003533, type: 3}
       propertyPath: growthAmountText
       value: 
