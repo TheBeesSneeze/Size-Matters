@@ -52,8 +52,6 @@ public class InterractableObject : MonoBehaviour
 
     [SerializeField] private float scaleChangeSmoothingTime = 0.1f;
 
-    [Header("Debug")] public float CurrentSize = 1.0f; //inv lerp for getting current size.
-
     private Rigidbody rb;
     private Vector3 initScale;
     private Vector3 minScale, maxScale;
@@ -61,6 +59,7 @@ public class InterractableObject : MonoBehaviour
     private Vector3 scaleDampRef;
     private float initMass;
     private OutlineBehavior outline;
+    private float currentSize;
 
     private void Awake()
     {
@@ -71,6 +70,7 @@ public class InterractableObject : MonoBehaviour
         initScale = transform.localScale;
         scaleTarget = initScale;
         initMass = rb.mass;
+        currentSize = transform.localScale.magnitude * 10f;
         //CurrentSize = transform.localScale.magnitude;
         SetBoundingScales();
     }
@@ -78,7 +78,7 @@ public class InterractableObject : MonoBehaviour
     private void Update()
     {
         //smooths any changes in scale.
-        transform.localScale = Vector3.SmoothDamp(transform.localScale, scaleTarget, ref scaleDampRef, scaleChangeSmoothingTime);
+        transform.localScale = Vector3.Lerp(transform.localScale, scaleTarget, Time.deltaTime * 10f);
     }
 
     /// <summary>
@@ -117,8 +117,8 @@ public class InterractableObject : MonoBehaviour
     public float GrowOrShrink(float rate)
     {
         SetBoundingScales();
-
         float change = rate * Time.deltaTime * scaleChangeRateMultiplier;
+        var prevScale = scaleTarget;
         var newScale = scaleTarget;
         newScale.x = Mathf.Clamp(newScale.x + change, minScale.x,
             maxScale.x);
@@ -131,9 +131,7 @@ public class InterractableObject : MonoBehaviour
         if(rb != null)
             rb.mass = initMass * (scaleTarget.magnitude / initScale.magnitude);
 
-        float prevSize = CurrentSize;
-        CurrentSize = (scaleTarget.magnitude / initScale.magnitude);
-        return prevSize - CurrentSize;
+        return (prevScale - scaleTarget).magnitude;
     }
 
     [Button]
