@@ -175,29 +175,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      propertyPath: damper
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      propertyPath: MaxPickupDistance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      propertyPath: NoObjectLM.m_Bits
-      value: 132
-      objectReference: {fileID: 0}
-    - target: {fileID: 6057954047100544723, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      propertyPath: MaxDistanceFromPlayer
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7777369738489023938, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7777369738489023938, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -451,6 +431,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: scaleZ
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}

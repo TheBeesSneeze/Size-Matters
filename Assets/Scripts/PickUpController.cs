@@ -18,6 +18,7 @@ using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using digitalopus.physics.kinematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,17 +28,17 @@ public class PickUpController : MonoBehaviour
 {
     public static PickUpController Instance;
 
-    [Header("Settings")]
-
-    [Tooltip("The heaviest the player can carry")]
+    [Header("Settings")] [Tooltip("The heaviest the player can carry")]
     public float MaxWeight;
+
     [Tooltip("*Before picking up the object*, how far the it can be from the player")]
     public float MaxPickupDistance;
+
     [Tooltip("How far the object can be from the player")]
     public float MaxDistanceFromPlayer;
 
-    [Tooltip("true for movement via velocity (good), false for snapping to raycast point(bad")]
-    [SerializeField] private bool MoveViaPhysics=true; //kill your babies
+    [Tooltip("true for movement via velocity (good), false for snapping to raycast point(bad")] [SerializeField]
+    private bool MoveViaPhysics = true; //kill your babies
 
     //actions stuff
     //public PlayerInput playerInput;
@@ -48,6 +49,9 @@ public class PickUpController : MonoBehaviour
 
     [SerializeField] private float spring = 100;
     [SerializeField] private float damper = 10;
+    [SerializeField] private float maxForce = 100;
+    [SerializeField] private SPDVector3CalculatorV2 forcePD;
+    [SerializeField] private Transform holdPoint;
 
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
@@ -80,11 +84,12 @@ public class PickUpController : MonoBehaviour
 
     private void PickUp_Started(InputAction.CallbackContext obj)
     {
-        if(currentlyHeldObject == null)
+        if (currentlyHeldObject == null)
         {
             AttemptPickup();
             return;
         }
+
         DropObject();
     }
 
@@ -131,7 +136,7 @@ public class PickUpController : MonoBehaviour
 
         //snap object to center of players screen
 
-        if(!MoveViaPhysics)
+        if (!MoveViaPhysics)
             StartCoroutine(UpdateObjectPosition());
     }
 
@@ -143,17 +148,21 @@ public class PickUpController : MonoBehaviour
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
         objectRB.useGravity = true;
         objectRB.constraints = RigidbodyConstraints.None;
+        objectRB.transform.position = holdPoint.position;
+
+        if (currentlyHeldObject.NoThrow)
+        {
+            objectRB.velocity = Vector3.zero;
+        }
 
         currentlyHeldObject = null;
-
     }
 
     private IEnumerator UpdateObjectPosition()
-    {     
+    {
         currentlyHeldObject.GetComponent<Collider>().enabled = false;
         while (currentlyHeldObject != null)
         {
-
             holdPosition = GetHoldPoint();
 
             currentlyHeldObject.transform.position = holdPosition;
@@ -168,34 +177,42 @@ public class PickUpController : MonoBehaviour
     {
         if (!MoveViaPhysics || !CurrentlyHolding) return;
 
-        holdPosition = GetHoldPoint();
+        holdPosition = holdPoint.position;
 
-        if(Vector3.Distance(holdPosition, currentlyHeldObject.transform.position) <= maxDistanceForMovement)
-        {
-            currentlyHeldObject.transform.position = holdPosition;
-            objectRB.velocity = Vector3.zero;
-            return;
-        }
-
-        Vector3 direction = holdPosition - currentlyHeldObject.transform.position;
-
-        direction = direction.normalized * spring;
-
-        Vector3 targetPosition = (holdPosition - LastPosition) / Time.fixedDeltaTime;
-        Vector3 Damper = (targetPosition - objectRB.velocity) * damper;
-
-        Vector3 force = direction + Damper;
-
-        objectRB.AddForce(force, ForceMode.Acceleration);
-
+        forcePD.dt = Time.fixedDeltaTime;
+        forcePD.kd = damper;
+        forcePD.kp = spring;
+        forcePD.mass = objectRB.mass;
+        Vector3 targetVelocity = (holdPosition - LastPosition) / Time.fixedDeltaTime;
+        objectRB.AddForce(forcePD.ComputSPDForce(objectRB.transform.position, objectRB.velocity, holdPosition,
+            targetVelocity));
         LastPosition = holdPosition;
+        RotateHeldObject();
+        // if(Vector3.Distance(holdPosition, currentlyHeldObject.transform.position) <= maxDistanceForMovement)
+        // {
+        //     currentlyHeldObject.transform.position = holdPosition;
+        //     objectRB.velocity = Vector3.zero;
+        //     LastPosition = holdPosition;
+        //     return;
+        // }
+        //
+        // Vector3 direction = holdPosition - currentlyHeldObject.transform.position;
+        //
+        // direction = direction * spring;
+        //
+        // Vector3 Damper = (targetVelocity - objectRB.velocity) * damper;
+        //
+        // Vector3 force = direction + Damper;
+        // force = Vector3.ClampMagnitude(force, maxForce);
+
+       // objectRB.AddForce(force, ForceMode.Acceleration);
+
 
         //objectRB.velocity = direction.normalized * 10;
         //objectRB.AddForce(direction.normalized*100);
 
         //rb.MovePosition(holdPosition);
 
-        RotateHeldObject();
     }
 
     private Vector3 GetHoldPoint()
@@ -203,11 +220,11 @@ public class PickUpController : MonoBehaviour
         Transform origin = Camera.main.transform;
         Ray ray = new Ray(origin.position, origin.forward);
 
-        Physics.Raycast(ray, out RaycastHit hit, MaxDistanceFromPlayer);//, NoObjectLM);
+        return origin.position + (origin.forward * MaxDistanceFromPlayer);
+        Physics.Raycast(ray, out RaycastHit hit, MaxDistanceFromPlayer); //, NoObjectLM);
 
         if (hit.transform == null)
         {
-            return origin.position + (origin.forward * MaxDistanceFromPlayer);
         }
 
         return hit.point;
@@ -218,7 +235,7 @@ public class PickUpController : MonoBehaviour
         float difference = transform.rotation.eulerAngles.y - startingPlayerYRotation;
 
         Vector3 newObjectRotation = currentlyHeldObject.transform.rotation.eulerAngles;
-        newObjectRotation.y= startingObjectYRotation + difference;
+        newObjectRotation.y = startingObjectYRotation + difference;
 
         //currentlyHeldObject.transform.rotation.eulerAngles = newObjectRotation;
         currentlyHeldObject.transform.rotation = Quaternion.Euler(newObjectRotation);
