@@ -152,7 +152,8 @@ public class PickUpController : MonoBehaviour
 
         if (currentlyHeldObject.NoThrow)
         {
-            objectRB.velocity = Vector3.zero;
+            //objectRB.velocity = Vector3.zero;
+            objectRB.velocity = objectRB.velocity / 5;
         }
 
         currentlyHeldObject = null;
