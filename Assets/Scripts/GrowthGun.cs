@@ -92,6 +92,8 @@ public class GrowthGun : MonoBehaviour
         if (leftClick && rightClick) return; //don't allow both to be pressed at same time.
 
         if (!(leftClick || rightClick)) return;
+
+        if (PickUpController.Instance.CurrentlyHolding) return;
         
         WhileClicking(leftClick, rightClick);
     }
