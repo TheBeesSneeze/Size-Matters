@@ -58,7 +58,7 @@ public class PickUpController : MonoBehaviour
     private float startingPlayerYRotation, startingObjectYRotation;
 
     private Rigidbody objectRB;
-    private bool CurrentlyHolding;
+    [HideInInspector] public bool CurrentlyHolding;
     private Vector3 LastPosition;
 
     private float maxDistanceForMovement = 0.05f;
