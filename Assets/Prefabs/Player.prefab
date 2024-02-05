@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 6057954047100544723}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,12 +284,6 @@ MonoBehaviour:
     kp: 0
     mass: 0
     dt: 0
-    kd: 0
-  torquePD:
-    inertiaTensor: {x: 0, y: 0, z: 0}
-    body_intertiaTensorRotation_dyn: {x: 0, y: 0, z: 0, w: 0}
-    dt: 0
-    kp: 0
     kd: 0
   holdPoint: {fileID: 3981871118946105532}
 --- !u!1 &7845973415420447653
