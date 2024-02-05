@@ -238,6 +238,8 @@ MonoBehaviour:
   PressurePlateNotTriggered:
     m_PersistentCalls:
       m_Calls: []
+  pressurePlateActivated: {fileID: 0}
+  pressurePlateDeactivated: {fileID: 0}
 --- !u!1 &8216292691337188020
 GameObject:
   m_ObjectHideFlags: 0
