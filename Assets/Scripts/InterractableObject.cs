@@ -60,6 +60,7 @@ public class InterractableObject : MonoBehaviour
     private float initMass;
     private OutlineBehavior outline;
     private float currentSize;
+    [SerializeField] private float shrinkingOffset;
 
     private void Awake()
     {
@@ -130,6 +131,12 @@ public class InterractableObject : MonoBehaviour
 
         if(rb != null)
             rb.mass = initMass * (scaleTarget.magnitude / initScale.magnitude);
+
+        if (rate < 0)
+        {
+            //shrinking
+            return (prevScale - scaleTarget).magnitude + shrinkingOffset;
+        }
 
         return (prevScale - scaleTarget).magnitude;
     }
