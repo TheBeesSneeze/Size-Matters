@@ -41,8 +41,6 @@ public class CrosshairManager : MonoBehaviour
     {
         if (_crossHair == mode) return; //this helps me sleep at night
 
-        Debug.Log("updating crosshair");
-
         _crossHair = mode;
 
         switch(mode)

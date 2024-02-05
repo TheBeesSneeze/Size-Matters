@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 6057954047100544723}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +129,7 @@ Transform:
   - {fileID: 2491600498450484434}
   - {fileID: 7464184643980326313}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &6570968697160916172
 CharacterController:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 655b914d691847842b394e37512ebddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 2
+  playerSpeed: 4
   jumpHeight: 0.5
   gravityValue: -9.81
   lookSensitivity: 25
@@ -247,6 +247,14 @@ MonoBehaviour:
   raycastOrigin: {fileID: 2491600498450484434}
   spring: 100
   damper: 10
+  maxForce: 100
+  forcePD:
+    kp: 0
+    mass: 0
+    dt: 0
+    kd: 0
+  holdPoint: {fileID: 0}
+  CurrentlyHolding: 0
 --- !u!1 &7845973415420447653
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,9 +346,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2807889623892200252}
     m_Modifications:
+    - target: {fileID: 232297265623640016, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 56eee6c6dd3a23a42b26c0e6044eeff2, type: 3}
     - target: {fileID: 4589318496783585448, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
       propertyPath: m_Name
       value: Crosshair Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575814668860681471, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5575814668860681471, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5940944591650610427, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
       propertyPath: m_Pivot.x
@@ -429,8 +449,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2974749061880272824, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 5565808455728800130}
   m_SourcePrefab: {fileID: 100100000, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
+--- !u!1 &2066038702396636906 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2974749061880272824, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
+  m_PrefabInstance: {fileID: 3883340663366068562}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5565808455728800130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066038702396636906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c74291cf4085791438c6f6fdc54d768f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CrosshairEmpty: {fileID: 21300000, guid: 56eee6c6dd3a23a42b26c0e6044eeff2, type: 3}
+  CrosshairFill: {fileID: 21300000, guid: a78097264a7a69842b8475347b95e54c, type: 3}
+  CrosshairX: {fileID: 21300000, guid: 3f1b5e9f3e0c4d54da3f4575416a858e, type: 3}
+  CrosshairHand: {fileID: 21300000, guid: 103250b76ff698d48b2ad9489d874922, type: 3}
 --- !u!224 &7464184643980326313 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5940944591650610427, guid: 2834530268baa9c4eb5fdeb5056c7ac0, type: 3}
