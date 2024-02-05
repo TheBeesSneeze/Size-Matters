@@ -175,13 +175,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3953365405431041666, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      propertyPath: m_Sprite
+    - target: {fileID: 6814261859440084359, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: CrosshairX
+      value: 
+      objectReference: {fileID: 21300000, guid: 3f1b5e9f3e0c4d54da3f4575416a858e, type: 3}
+    - target: {fileID: 6814261859440084359, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: CrosshairFill
+      value: 
+      objectReference: {fileID: 21300000, guid: a78097264a7a69842b8475347b95e54c, type: 3}
+    - target: {fileID: 6814261859440084359, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: CrosshairHand
+      value: 
+      objectReference: {fileID: 21300000, guid: 103250b76ff698d48b2ad9489d874922, type: 3}
+    - target: {fileID: 6814261859440084359, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: CrosshairEmpty
       value: 
       objectReference: {fileID: 21300000, guid: 56eee6c6dd3a23a42b26c0e6044eeff2, type: 3}
     - target: {fileID: 7777369738489023938, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8684382795765237165, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 8684382795765237165, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -190,9 +210,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7152997335724982141, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 2066038702396636906, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 1756161166}
   m_SourcePrefab: {fileID: 100100000, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
 --- !u!1001 &508681316
 PrefabInstance:
@@ -607,27 +624,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1756161162 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2066038702396636906, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
-  m_PrefabInstance: {fileID: 334535136}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1756161166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1756161162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c74291cf4085791438c6f6fdc54d768f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CrosshairEmpty: {fileID: 0}
-  CrosshairFill: {fileID: 0}
-  CrosshairX: {fileID: 0}
-  CrosshairHand: {fileID: 0}
 --- !u!1 &1910212059
 GameObject:
   m_ObjectHideFlags: 0

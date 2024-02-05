@@ -61,15 +61,13 @@ public class InputManager : MonoBehaviour
         };
         
     }
-
-    
-
     private void Start()
     {
         Look = mainControls.StandardLayout.Look;
         Grow = mainControls.StandardLayout.Grow;
         Shrink = mainControls.StandardLayout.Shrink;
         Movement = mainControls.StandardLayout.Movement;
+
     }
 
     private void Update()

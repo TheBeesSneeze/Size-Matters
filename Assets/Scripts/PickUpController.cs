@@ -86,6 +86,7 @@ public class PickUpController : MonoBehaviour
     {
         if (currentlyHeldObject == null)
         {
+            CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
             AttemptPickup();
             return;
         }
@@ -103,7 +104,15 @@ public class PickUpController : MonoBehaviour
 
         if (Physics.Raycast(originPoint, out RaycastHit hit, MaxPickupDistance))
         {
-            if (hit.rigidbody == null) return;
+            //float distance = Vector3.Distance(raycastOrigin.position, hit.transform.position);
+
+            //if (distance > maxDistanceForMovement) return;
+
+            if (hit.rigidbody == null)
+            {
+                CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
+                return;
+            }
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
@@ -115,8 +124,10 @@ public class PickUpController : MonoBehaviour
                 if (interact.GetWeight() > MaxWeight) return;
 
                 PickUpObject(interact);
+                return;
             }
         }
+        CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
     }
 
     private void PickUpObject(InterractableObject obj)
@@ -138,6 +149,8 @@ public class PickUpController : MonoBehaviour
 
         if (!MoveViaPhysics)
             StartCoroutine(UpdateObjectPosition());
+
+        CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.Fill;
     }
 
     private void DropObject()
@@ -157,6 +170,8 @@ public class PickUpController : MonoBehaviour
         }
 
         currentlyHeldObject = null;
+
+        CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.Hand;
     }
 
     private IEnumerator UpdateObjectPosition()
