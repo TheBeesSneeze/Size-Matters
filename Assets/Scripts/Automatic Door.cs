@@ -24,20 +24,23 @@ public class AutomaticDoor : MonoBehaviour
     {
         if (playerIsHere)
         {
-            if (movingDoor.transform.position.x < maxDoorOpening + automaticDoorsXPosition)
-            {
-                movingDoor.transform.Translate((movingSpeed * Time.deltaTime), 0f, 0f);
+            movingDoor.SetActive(false);
+            //if (movingDoor.transform.position.x < (maxDoorOpening + automaticDoorsXPosition))
+            //{
+            //    movingDoor.transform.Translate((movingSpeed * Time.deltaTime), 0f, 0f);
 
-            }
+            //}
         }
         else
         {
-            if (movingDoor.transform.position.x > automaticDoorsXPosition)
-            {
-                movingDoor.transform.Translate((-movingSpeed * Time.deltaTime), 0f, 0f);
-            }
+            movingDoor.SetActive(true);
+            //if (movingDoor.transform.position.x > automaticDoorsXPosition)
+            //{
+            //    movingDoor.transform.Translate((-movingSpeed * Time.deltaTime), 0f, 0f);
+            //}
         }
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
