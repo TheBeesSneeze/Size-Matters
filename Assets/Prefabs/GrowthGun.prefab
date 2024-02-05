@@ -216,7 +216,7 @@ Transform:
   - {fileID: 5127550454417517944}
   - {fileID: 2010988155634990756}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7142471753697378135
 MonoBehaviour:
@@ -235,6 +235,10 @@ MonoBehaviour:
   maxRaycastDistance: 30
   scaleRate: 10
   useMousePosition: 0
+  GrowSound: {fileID: 8300000, guid: 2d0f23b02d9132a4dab004492da54e60, type: 3}
+  growLimit: {fileID: 8300000, guid: 1e9f9c0e9d5cf9649bfefa07943ab3f3, type: 3}
+  shrinkSound: {fileID: 8300000, guid: 2d0f23b02d9132a4dab004492da54e60, type: 3}
+  shrinkLimit: {fileID: 8300000, guid: 1e9f9c0e9d5cf9649bfefa07943ab3f3, type: 3}
   growthAmountImage: {fileID: 1875256180199042383}
   growthAmountText: {fileID: 0}
   startingGrowthJuice: 10

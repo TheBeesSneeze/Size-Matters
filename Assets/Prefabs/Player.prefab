@@ -161,7 +161,7 @@ Transform:
   - {fileID: 2491600498450484434}
   - {fileID: 7464184643980326313}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &6570968697160916172
 CharacterController:
@@ -208,7 +208,7 @@ MonoBehaviour:
   pushForce: 2
   cam: {fileID: 5521326927341189067}
   JumpSound: {fileID: 0}
-  WalkingSound: {fileID: 0}
+  WalkingSound: {fileID: 8300000, guid: 3a9d8974620aeba438798aaf92452250, type: 3}
 --- !u!114 &2586269939447335382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +286,7 @@ MonoBehaviour:
     dt: 0
     kd: 0
   holdPoint: {fileID: 3981871118946105532}
+  CurrentlyHolding: 0
 --- !u!1 &7845973415420447653
 GameObject:
   m_ObjectHideFlags: 0
