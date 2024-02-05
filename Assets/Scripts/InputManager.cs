@@ -77,37 +77,30 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void DetectLookingObject()
     {
-        Transform raycastOrigin = cam.transform;
-
         //thanks alec for letting me steal your code
         Ray originPoint =
-            raycastOrigin
-                ? new Ray(raycastOrigin.position, raycastOrigin.forward)
-                : Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                 cam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
         if (Physics.Raycast(originPoint, out RaycastHit hit, GrowthGun.Instance.maxRaycastDistance))
         {
-            if (hit.rigidbody == null) return;
-
-            if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
+            if (hit.rigidbody && hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
-                if (interact == null) return;
-
+                if (currentlyViewedObject != null && interact != currentlyViewedObject)
+                {
+                    currentlyViewedObject.OnPlayerLookingExit();
+                    currentlyViewedObject = null;
+                }
                 interact.OnPlayerLooking();
-
                 currentlyViewedObject = interact;
-
                 return;
             }
         }
-        
+     
         if (currentlyViewedObject != null)
         { 
             currentlyViewedObject.OnPlayerLookingExit();
+            currentlyViewedObject = null;
         }
-       
-
-        currentlyViewedObject = null;
     }
 
     private void OnEnable()

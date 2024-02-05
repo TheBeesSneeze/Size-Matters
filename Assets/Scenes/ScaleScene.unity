@@ -300,6 +300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableObject
       objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7675912476114666917, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Constraints
       value: 94
@@ -3409,6 +3413,7 @@ MonoBehaviour:
   TargetWeightErrorMargin: 0.5
   triggered: 0
   WeightDisplayText: {fileID: 900715457}
+  ObjOnPlate: []
   PressurePlateTriggered:
     m_PersistentCalls:
       m_Calls:
