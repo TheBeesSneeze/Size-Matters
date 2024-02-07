@@ -17,14 +17,16 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
-    [HideInInspector] public InputAction Look;
-    [HideInInspector] public InputAction Grow;
-    [HideInInspector] public InputAction Shrink;
-    [HideInInspector] public InputAction Movement;
+    [HideInInspector] public InputAction Look => mainControls.StandardLayout.Look;
+    [HideInInspector] public InputAction Grow => mainControls.StandardLayout.Grow;
+    [HideInInspector] public InputAction Shrink => mainControls.StandardLayout.Shrink;
+    [HideInInspector] public InputAction Movement => mainControls.StandardLayout.Movement;
 
     private static InputManager _instance;
 
     private InterractableObject currentlyViewedObject;
+
+    private bool paused;
 
     public static InputManager Instance
     {
@@ -51,20 +53,13 @@ public class InputManager : MonoBehaviour
         cam = Camera.main;
 
         mainControls = new MainControls();
-        mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+        //mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+        mainControls.StandardLayout.Quit.started += Pause_started;
         mainControls.StandardLayout.Restart.performed += context =>
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         };
         
-    }
-
-    private void Start()
-    {
-        Look = mainControls.StandardLayout.Look;
-        Grow = mainControls.StandardLayout.Grow;
-        Shrink = mainControls.StandardLayout.Shrink;
-        Movement = mainControls.StandardLayout.Movement;
     }
 
     private void Update()
@@ -141,5 +136,34 @@ public class InputManager : MonoBehaviour
     public bool PickUpPressed()
     {
         return mainControls.StandardLayout.Pickup.IsPressed();
+    }
+
+    private void Pause_started(InputAction.CallbackContext obj)
+    {
+        paused = !paused;
+
+        if (paused)
+        {
+            if(MenuManager.Instance!=null)
+                MenuManager.Instance.PauseMenuCanvas.SetActive(true);
+
+            Cursor.visible = true;
+
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Unpause();
+        }
+    }
+    public void Unpause()
+    {
+        if (MenuManager.Instance != null)
+            MenuManager.Instance.PauseMenuCanvas.SetActive(false);
+
+        paused = false; 
+        Time.timeScale = 1;
+
+        Cursor.visible = false;
     }
 }

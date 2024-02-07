@@ -52,6 +52,14 @@ public class PickUpController : MonoBehaviour
     [SerializeField] private float maxForce = 100;
     [SerializeField] private SPDVector3CalculatorV2 forcePD;
     [SerializeField] private Transform holdPoint;
+    [Foldout("Audio")]
+    [SerializeField] private AudioClip pickupClip;
+    [Foldout("Audio")]
+    [SerializeField] private float pickupClipVolume = 0.6f;
+    [Foldout("Audio")]
+    [SerializeField] private AudioClip dropClip;
+    [Foldout("Audio")]
+    [SerializeField] private float dropClipVolume = 0.6f;
 
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
@@ -86,6 +94,7 @@ public class PickUpController : MonoBehaviour
     {
         if (currentlyHeldObject == null)
         {
+            CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
             AttemptPickup();
             return;
         }
@@ -103,7 +112,15 @@ public class PickUpController : MonoBehaviour
 
         if (Physics.Raycast(originPoint, out RaycastHit hit, MaxPickupDistance))
         {
-            if (hit.rigidbody == null) return;
+            //float distance = Vector3.Distance(raycastOrigin.position, hit.transform.position);
+
+            //if (distance > maxDistanceForMovement) return;
+
+            if (hit.rigidbody == null)
+            {
+                CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
+                return;
+            }
 
             if (hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
@@ -115,14 +132,19 @@ public class PickUpController : MonoBehaviour
                 if (interact.GetWeight() > MaxWeight) return;
 
                 PickUpObject(interact);
+                return;
             }
         }
+        CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
     }
 
     private void PickUpObject(InterractableObject obj)
     {
         CurrentlyHolding = true;
-
+        if (pickupClip)
+        {
+            AudioSource.PlayClipAtPoint(pickupClip, transform.position, pickupClipVolume);
+        }
         currentlyHeldObject = obj;
 
         startingPlayerYRotation = transform.rotation.eulerAngles.y;
@@ -133,16 +155,24 @@ public class PickUpController : MonoBehaviour
         objectRB = currentlyHeldObject.GetComponent<Rigidbody>();
         objectRB.useGravity = false;
         objectRB.constraints = RigidbodyConstraints.FreezeRotation;
+        LastPosition = holdPoint.position;
 
         //snap object to center of players screen
 
         if (!MoveViaPhysics)
             StartCoroutine(UpdateObjectPosition());
+
+        CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.Fill;
     }
 
     private void DropObject()
     {
         CurrentlyHolding = false;
+
+        if (dropClip)
+        {
+            AudioSource.PlayClipAtPoint(dropClip, transform.position, dropClipVolume);
+        }
 
         currentlyHeldObject.transform.gameObject.layer = 0;
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
@@ -157,6 +187,8 @@ public class PickUpController : MonoBehaviour
         }
 
         currentlyHeldObject = null;
+
+        CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.Hand;
     }
 
     private IEnumerator UpdateObjectPosition()

@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class OutlineBehavior : MonoBehaviour
 {
-    public Color NoLookColor; //todo
+    public Color NoLookColor;
     public Color IdleColor;
     public Color GrowColor;
     public Color ShrinkColor;
-    public Color AtLimitColor; //todo
+    public Color AtLimitColor;
 
     private Outline outline;
     private LineRenderer lineRenderer;
@@ -21,6 +21,7 @@ public class OutlineBehavior : MonoBehaviour
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
         lineRenderer.positionCount = 2;
+        lineRenderer.sortingOrder = -1;
         ResetLineRenderer();
     }
 

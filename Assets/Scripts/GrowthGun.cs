@@ -60,6 +60,7 @@ public class GrowthGun : MonoBehaviour
     }
 
     [HideInInspector] public ResizingState ResizeState;
+    private ResizingState resizeStateLastFrame;
 
     private void Awake()
     {
@@ -84,6 +85,7 @@ public class GrowthGun : MonoBehaviour
 
     private void Update()
     {
+        resizeStateLastFrame = ResizeState;
         ResizeState = ResizingState.Idle;
 
         bool leftClick = InputManager.Instance.LeftClickPressed();
@@ -129,16 +131,33 @@ public class GrowthGun : MonoBehaviour
         {
             if (hit.rigidbody && hit.rigidbody.TryGetComponent(out InterractableObject interact))
             {
+                //no juice and tryna grow
                 if (currentGrowthJuice <= 0.01f && leftClick)
                 {
+                    CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
+                    if (resizeStateLastFrame != ResizingState.Bounds)
+                    {
+                        if (growLimit != null)
+                        {
+                            AudioSource.PlayClipAtPoint(growLimit, FirePoint.position);
+                        }
+                    }
                     ResizeState = ResizingState.Bounds;
-                    return; //no juice and tryna grow
+                    return; 
                 }
-                //there is a problem here!!!                     V
-                if (currentGrowthJuice >= startingGrowthJuice + 0.01f && rightClick)
+                //we have juice and we're tryna shrink further, gun is full.
+                if (currentGrowthJuice >= startingGrowthJuice - 0.01f && rightClick)
                 {
+                    CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.X;
+                    if (resizeStateLastFrame != ResizingState.Bounds)
+                    {
+                        if (shrinkLimit != null)
+                        {
+                            AudioSource.PlayClipAtPoint(shrinkLimit, FirePoint.position);
+                        }
+                    }
                     ResizeState = ResizingState.Bounds;
-                    return; //we have juice and we're tryna shrink further, gun is full.
+                    return; 
                 }
 
                 float change = interact.GrowOrShrink(sign * scaleRate); //no need for a delta time, we handle it at the object level.
