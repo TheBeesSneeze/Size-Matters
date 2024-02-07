@@ -69,13 +69,19 @@ public class PressurePlateBehavior : MonoBehaviour
             if (weight <= (TargetWeight + TargetWeightErrorMargin) &&
             weight >= (TargetWeight - TargetWeightErrorMargin))
             {
+                if (!triggered)
+                {
+                    PressurePlateTriggered.Invoke();
+                }
                 triggered = true;
-                PressurePlateTriggered.Invoke();
             }
             else
             {
+                if (triggered)
+                {
+                    PressurePlateNotTriggered.Invoke();
+                }
                 triggered = false;
-                PressurePlateNotTriggered.Invoke();
             }
         }
         else 

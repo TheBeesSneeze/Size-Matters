@@ -55,6 +55,7 @@ public class InterractableObject : MonoBehaviour
     [Header("Debug")] public float CurrentSize = 1.0f; //inv lerp for getting current size.
 
     [HideInInspector] public bool PlayerLooking;
+    [HideInInspector] public Vector3 StartingPosition;
 
     private Rigidbody rb;
     private Vector3 initScale;
@@ -69,10 +70,13 @@ public class InterractableObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+        initMass = rb.mass;
+
+        StartingPosition = transform.position;
+
         outline = GetComponent<OutlineBehavior>();
         initScale = transform.localScale;
         scaleTarget = initScale;
-        initMass = rb.mass;
 
         SetBoundingScales();
     }

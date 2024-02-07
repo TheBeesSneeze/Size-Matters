@@ -75,12 +75,19 @@ public class PlayerController : MonoBehaviour
             if (Time.timeScale == 0)
             {
                 oscillator.Wrapped = false;
+                oscillator.currentPhase = 0f;
                 return;
             }
+
             oscillator.currentFrequency = walkFrequency;
             if (move.magnitude > 0.5f)
             {
                 oscillator.Advance(Time.deltaTime);
+            }
+            else
+            {
+                oscillator.currentPhase = 0f;
+                oscillator.Wrapped = false;
             }
 
             if (oscillator.Wrapped)
