@@ -2984,7 +2984,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4334381704457707436, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Name
-      value: InteractableObject
+      value: PlayerParent
       objectReference: {fileID: 0}
     - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: NoThrow
@@ -15682,7 +15682,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -16696,7 +16696,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1652832408}
+  m_Mesh: {fileID: 1014792709}
 --- !u!33 &363122751
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -20013,7 +20013,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1463394887}
+  m_Mesh: {fileID: 467090670}
 --- !u!33 &675359981
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -24204,7 +24204,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
