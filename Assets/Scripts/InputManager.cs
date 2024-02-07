@@ -26,6 +26,8 @@ public class InputManager : MonoBehaviour
 
     private InterractableObject currentlyViewedObject;
 
+    private bool paused;
+
     public static InputManager Instance
     {
         get
@@ -51,20 +53,21 @@ public class InputManager : MonoBehaviour
         cam = Camera.main;
 
         mainControls = new MainControls();
-        mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+        //mainControls.StandardLayout.Quit.performed += context => { Application.Quit(); };
+        mainControls.StandardLayout.Quit.started += Pause_started;
         mainControls.StandardLayout.Restart.performed += context =>
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         };
         
     }
-
     private void Start()
     {
         Look = mainControls.StandardLayout.Look;
         Grow = mainControls.StandardLayout.Grow;
         Shrink = mainControls.StandardLayout.Shrink;
         Movement = mainControls.StandardLayout.Movement;
+
     }
 
     private void Update()
@@ -141,5 +144,34 @@ public class InputManager : MonoBehaviour
     public bool PickUpPressed()
     {
         return mainControls.StandardLayout.Pickup.IsPressed();
+    }
+
+    private void Pause_started(InputAction.CallbackContext obj)
+    {
+        paused = !paused;
+
+        if (paused)
+        {
+            if(MenuManager.Instance!=null)
+                MenuManager.Instance.PauseMenuCanvas.SetActive(true);
+
+            Cursor.visible = true;
+
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Unpause();
+        }
+    }
+    public void Unpause()
+    {
+        if (MenuManager.Instance != null)
+            MenuManager.Instance.PauseMenuCanvas.SetActive(false);
+
+        paused = false; 
+        Time.timeScale = 1;
+
+        Cursor.visible = false;
     }
 }
