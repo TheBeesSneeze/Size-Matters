@@ -21,6 +21,7 @@ public class OutlineBehavior : MonoBehaviour
         lineRenderer.startWidth = 0.1f;
         lineRenderer.endWidth = 0.1f;
         lineRenderer.positionCount = 2;
+        lineRenderer.sortingOrder = -1;
         ResetLineRenderer();
     }
 

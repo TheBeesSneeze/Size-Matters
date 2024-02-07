@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sounds")] [SerializeField] [Foldout("Audio")]
     private AudioClip JumpSound;
 
+    [SerializeField] private float viewBobAmount = 0.05f;
     [SerializeField] [Foldout("Audio")] private float jumpVolume = 0.8f;
     [SerializeField] [Foldout("Audio")] private AudioClip WalkingSound;
     [SerializeField] [Foldout("Audio")] private float walkingVolume = 0.8f;
@@ -57,7 +58,7 @@ public class PlayerController : MonoBehaviour
         yMovement = Mathf.Clamp(yMovement, -90, 90);
         cam.transform.localEulerAngles = new Vector3(-yMovement, 0f, 0f);
         var pos = GrowthGun.Instance.transform.localPosition;
-        pos.y = -0.5f + oscillator.Eval() * 0.05f;
+        pos.y = -0.5f + oscillator.Eval() * viewBobAmount;
         GrowthGun.Instance.transform.localPosition =
             Vector3.Slerp(GrowthGun.Instance.transform.localPosition, pos, Time.deltaTime * 5f);
         var pos2 = cam.transform.localPosition;
