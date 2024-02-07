@@ -144,6 +144,7 @@ public class PickUpController : MonoBehaviour
         objectRB = currentlyHeldObject.GetComponent<Rigidbody>();
         objectRB.useGravity = false;
         objectRB.constraints = RigidbodyConstraints.FreezeRotation;
+        LastPosition = holdPoint.position;
 
         //snap object to center of players screen
 
