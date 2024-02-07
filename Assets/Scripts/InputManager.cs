@@ -17,10 +17,10 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
-    [HideInInspector] public InputAction Look;
-    [HideInInspector] public InputAction Grow;
-    [HideInInspector] public InputAction Shrink;
-    [HideInInspector] public InputAction Movement;
+    [HideInInspector] public InputAction Look => mainControls.StandardLayout.Look;
+    [HideInInspector] public InputAction Grow => mainControls.StandardLayout.Grow;
+    [HideInInspector] public InputAction Shrink => mainControls.StandardLayout.Shrink;
+    [HideInInspector] public InputAction Movement => mainControls.StandardLayout.Movement;
 
     private static InputManager _instance;
 
@@ -60,14 +60,6 @@ public class InputManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         };
         
-    }
-    private void Start()
-    {
-        Look = mainControls.StandardLayout.Look;
-        Grow = mainControls.StandardLayout.Grow;
-        Shrink = mainControls.StandardLayout.Shrink;
-        Movement = mainControls.StandardLayout.Movement;
-
     }
 
     private void Update()

@@ -52,6 +52,14 @@ public class PickUpController : MonoBehaviour
     [SerializeField] private float maxForce = 100;
     [SerializeField] private SPDVector3CalculatorV2 forcePD;
     [SerializeField] private Transform holdPoint;
+    [Foldout("Audio")]
+    [SerializeField] private AudioClip pickupClip;
+    [Foldout("Audio")]
+    [SerializeField] private float pickupClipVolume = 0.6f;
+    [Foldout("Audio")]
+    [SerializeField] private AudioClip dropClip;
+    [Foldout("Audio")]
+    [SerializeField] private float dropClipVolume = 0.6f;
 
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
@@ -133,7 +141,10 @@ public class PickUpController : MonoBehaviour
     private void PickUpObject(InterractableObject obj)
     {
         CurrentlyHolding = true;
-
+        if (pickupClip)
+        {
+            AudioSource.PlayClipAtPoint(pickupClip, transform.position, pickupClipVolume);
+        }
         currentlyHeldObject = obj;
 
         startingPlayerYRotation = transform.rotation.eulerAngles.y;
@@ -157,6 +168,11 @@ public class PickUpController : MonoBehaviour
     private void DropObject()
     {
         CurrentlyHolding = false;
+
+        if (dropClip)
+        {
+            AudioSource.PlayClipAtPoint(dropClip, transform.position, dropClipVolume);
+        }
 
         currentlyHeldObject.transform.gameObject.layer = 0;
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
