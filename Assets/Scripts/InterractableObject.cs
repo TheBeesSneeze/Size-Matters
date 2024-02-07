@@ -54,6 +54,9 @@ public class InterractableObject : MonoBehaviour
 
     [Header("Debug")] public float CurrentSize = 1.0f; //inv lerp for getting current size.
 
+    [HideInInspector] public bool PlayerLooking;
+    [HideInInspector] public Vector3 StartingPosition;
+
     private Rigidbody rb;
     private Vector3 initScale;
     private Vector3 minScale, maxScale;
@@ -67,10 +70,13 @@ public class InterractableObject : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         rb.interpolation = RigidbodyInterpolation.Interpolate;
+        initMass = rb.mass;
+
+        StartingPosition = transform.position;
+
         outline = GetComponent<OutlineBehavior>();
         initScale = transform.localScale;
         scaleTarget = initScale;
-        initMass = rb.mass;
 
         SetBoundingScales();
     }
@@ -95,18 +101,31 @@ public class InterractableObject : MonoBehaviour
     /// </summary>
     public virtual void OnPlayerLooking()
     {
-        if(outline == null)
+        PlayerLooking = true;
+
+        if (outline == null)
         {
             Debug.LogWarning("no outline? :(");
             return;
         }
         outline.CorrectOutline();
+
+        CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.Fill;
+
+        CrosshairManager.Instance.StartCoroutine(CrosshairManager.Instance.CheckIfPlayerLooking(this));
+
+
     }
 
     public virtual void OnPlayerLookingExit()
     {
-        if(outline!= null)
+        PlayerLooking = false;
+
+        if (outline!= null)
             outline.StopOutlining();
+
+        if(!PickUpController.Instance.CurrentlyHolding)
+            CrosshairManager.Instance.Crosshair = CrosshairManager.Mode.Empty;
     }
 
     /// <summary>
