@@ -37,6 +37,9 @@ public class PickUpController : MonoBehaviour
     [Tooltip("How far the object can be from the player")]
     public float MaxDistanceFromPlayer;
 
+    [Tooltip("How far the object has to be until the player is forced to drop it")]
+    public float DropItemDistance;
+
     [Tooltip("true for movement via velocity (good), false for snapping to raycast point(bad")] [SerializeField]
     private bool MoveViaPhysics = true; //kill your babies
 
@@ -221,6 +224,14 @@ public class PickUpController : MonoBehaviour
             targetVelocity));
         LastPosition = holdPosition;
         RotateHeldObject();
+
+        float distance = Vector3.Distance(transform.position, objectRB.transform.position);
+        if(distance >= DropItemDistance)
+        {
+            DropObject();
+            return;
+        }
+
         // if(Vector3.Distance(holdPosition, currentlyHeldObject.transform.position) <= maxDistanceForMovement)
         // {
         //     currentlyHeldObject.transform.position = holdPosition;
