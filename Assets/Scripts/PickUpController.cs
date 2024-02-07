@@ -148,7 +148,7 @@ public class PickUpController : MonoBehaviour
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
         objectRB.useGravity = true;
         objectRB.constraints = RigidbodyConstraints.None;
-       // objectRB.transform.position = holdPoint.position;
+        objectRB.transform.position = holdPoint.position;
 
         if (currentlyHeldObject.NoThrow)
         {
