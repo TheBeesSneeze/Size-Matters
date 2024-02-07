@@ -36,7 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5976855403237303749
 MonoBehaviour:
@@ -62,6 +62,7 @@ MonoBehaviour:
   scaleChangeRateMultiplier: 1
   scaleChangeSmoothingTime: 0.1
   CurrentSize: 1
+  PlayerLooking: 0
   scaleTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &7920633803072410236
 MonoBehaviour:
@@ -126,7 +127,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 89317f4812faf7f46b73a98fc89c0aeb, type: 2}
+  - {fileID: 2100000, guid: 0799c0fca43b43549b92dbbb57355b63, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
