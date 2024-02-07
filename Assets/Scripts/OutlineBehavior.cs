@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class OutlineBehavior : MonoBehaviour
 {
-    public Color NoLookColor; //todo
+    public Color NoLookColor;
     public Color IdleColor;
     public Color GrowColor;
     public Color ShrinkColor;
-    public Color AtLimitColor; //todo
+    public Color AtLimitColor;
 
     private Outline outline;
     private LineRenderer lineRenderer;

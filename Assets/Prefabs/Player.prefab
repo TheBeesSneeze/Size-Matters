@@ -290,7 +290,7 @@ Transform:
   - {fileID: 7464184643980326313}
   - {fileID: 7397469808597979797}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &6570968697160916172
 CharacterController:
@@ -368,8 +368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxWeight: 100
-  MaxPickupDistance: 3
-  MaxDistanceFromPlayer: 1.75
+  MaxPickupDistance: 1.75
+  MaxDistanceFromPlayer: 0.5
   MoveViaPhysics: 1
   NoObjectLM:
     serializedVersion: 2
