@@ -17,7 +17,9 @@ public class PressurePlateBehavior : MonoBehaviour
     public float TargetWeightErrorMargin = 0.1f; // pressure plate will still tigger when the weight is +- this value.
                                                  // this value is only important when exact target mode is active
     
-    public bool triggered = false; 
+    public bool triggered = false;
+    public Color textColor = Color.white;
+    public Color TriggeredTextColor = Color.green;
     public GameObject WeightDisplayText;
     
     List<InterractableObject> ObjOnPlate = new List<InterractableObject>(); //list of objs on pressure plate
@@ -72,6 +74,7 @@ public class PressurePlateBehavior : MonoBehaviour
                 if (!triggered)
                 {
                     PressurePlateTriggered.Invoke();
+                    WeightDisplayText.GetComponent<TextMeshPro>().color = TriggeredTextColor;
                 }
                 triggered = true;
             }
@@ -80,6 +83,8 @@ public class PressurePlateBehavior : MonoBehaviour
                 if (triggered)
                 {
                     PressurePlateNotTriggered.Invoke();
+                    WeightDisplayText.GetComponent<TextMeshPro>().color = textColor;
+                    print(WeightDisplayText.GetComponent<TextMeshPro>().color);
                 }
                 triggered = false;
             }
@@ -89,12 +94,15 @@ public class PressurePlateBehavior : MonoBehaviour
             if (weight >= TargetWeight)
             {
                 triggered = true;
+                WeightDisplayText.GetComponent<TextMeshPro>().color = TriggeredTextColor;
                 PressurePlateTriggered.Invoke();
             }
             else
             {
                 triggered = false;
                 PressurePlateNotTriggered.Invoke();
+                WeightDisplayText.GetComponent<TextMeshPro>().color = textColor;
+                print(WeightDisplayText.GetComponent<TextMeshPro>().color);
             }
         }
         if (ExactTargetMode)

@@ -67,6 +67,7 @@ public class PickUpController : MonoBehaviour
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
     private float startingPlayerYRotation, startingObjectYRotation;
+    private RigidbodyConstraints oldRotationConstraints;
 
     private Rigidbody objectRB;
     [HideInInspector] public bool CurrentlyHolding;
@@ -157,6 +158,7 @@ public class PickUpController : MonoBehaviour
 
         objectRB = currentlyHeldObject.GetComponent<Rigidbody>();
         objectRB.useGravity = false;
+        oldRotationConstraints = objectRB.constraints;
         objectRB.constraints = RigidbodyConstraints.FreezeRotation;
         LastPosition = holdPoint.position;
 
@@ -180,7 +182,7 @@ public class PickUpController : MonoBehaviour
         currentlyHeldObject.transform.gameObject.layer = 0;
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
         objectRB.useGravity = true;
-        objectRB.constraints = RigidbodyConstraints.None;
+        objectRB.constraints = oldRotationConstraints;
         objectRB.transform.position = holdPoint.position;
 
         if (currentlyHeldObject.NoThrow)
