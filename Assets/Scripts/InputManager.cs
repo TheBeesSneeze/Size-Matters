@@ -148,6 +148,7 @@ public class InputManager : MonoBehaviour
                 MenuManager.Instance.PauseMenuCanvas.SetActive(true);
 
             Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
             Time.timeScale = 0;
         }
@@ -164,6 +165,7 @@ public class InputManager : MonoBehaviour
         paused = false; 
         Time.timeScale = 1;
 
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 }

@@ -12,7 +12,8 @@ public class SceneChanger : MonoBehaviour
         Adam,
         Andrea,
         Jaxson,
-        Jamison
+        Jamison,
+        Tutorial
     }
 
     public Scene OutputScene;
@@ -47,6 +48,11 @@ public class SceneChanger : MonoBehaviour
             if (OutputScene == Scene.Jamison)
             {
                 SceneManager.LoadScene("ParkourScene");
+            }
+
+            if (OutputScene == Scene.Tutorial)
+            {
+                SceneManager.LoadScene("TutorialScene");
             }
         }
 
