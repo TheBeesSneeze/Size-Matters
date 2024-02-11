@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ParkourScene.unity
     guid: 1cad0206b14b45044aa7eb44e77a327a
+  - enabled: 1
+    path: Assets/Scenes/ScaleScene.unity
+    guid: f837b14728f6ea14cba1e7a9102a519c
   m_configObjects: {}
