@@ -37,6 +37,9 @@ public class PickUpController : MonoBehaviour
     [Tooltip("How far the object can be from the player")]
     public float MaxDistanceFromPlayer;
 
+    [Tooltip("How far the object has to be until the player is forced to drop it")]
+    public float DropItemDistance;
+
     [Tooltip("true for movement via velocity (good), false for snapping to raycast point(bad")] [SerializeField]
     private bool MoveViaPhysics = true; //kill your babies
 
@@ -52,10 +55,19 @@ public class PickUpController : MonoBehaviour
     [SerializeField] private float maxForce = 100;
     [SerializeField] private SPDVector3CalculatorV2 forcePD;
     [SerializeField] private Transform holdPoint;
+    [Foldout("Audio")]
+    [SerializeField] private AudioClip pickupClip;
+    [Foldout("Audio")]
+    [SerializeField] private float pickupClipVolume = 0.6f;
+    [Foldout("Audio")]
+    [SerializeField] private AudioClip dropClip;
+    [Foldout("Audio")]
+    [SerializeField] private float dropClipVolume = 0.6f;
 
     private InterractableObject currentlyHeldObject;
     private Vector3 holdPosition; //where the raycast hits
     private float startingPlayerYRotation, startingObjectYRotation;
+    private RigidbodyConstraints oldRotationConstraints;
 
     private Rigidbody objectRB;
     [HideInInspector] public bool CurrentlyHolding;
@@ -133,7 +145,10 @@ public class PickUpController : MonoBehaviour
     private void PickUpObject(InterractableObject obj)
     {
         CurrentlyHolding = true;
-
+        if (pickupClip)
+        {
+            AudioSource.PlayClipAtPoint(pickupClip, transform.position, pickupClipVolume);
+        }
         currentlyHeldObject = obj;
 
         startingPlayerYRotation = transform.rotation.eulerAngles.y;
@@ -143,7 +158,9 @@ public class PickUpController : MonoBehaviour
 
         objectRB = currentlyHeldObject.GetComponent<Rigidbody>();
         objectRB.useGravity = false;
+        oldRotationConstraints = objectRB.constraints;
         objectRB.constraints = RigidbodyConstraints.FreezeRotation;
+        LastPosition = holdPoint.position;
 
         //snap object to center of players screen
 
@@ -157,10 +174,15 @@ public class PickUpController : MonoBehaviour
     {
         CurrentlyHolding = false;
 
+        if (dropClip)
+        {
+            AudioSource.PlayClipAtPoint(dropClip, transform.position, dropClipVolume);
+        }
+
         currentlyHeldObject.transform.gameObject.layer = 0;
         currentlyHeldObject.GetComponent<Collider>().enabled = true;
         objectRB.useGravity = true;
-        objectRB.constraints = RigidbodyConstraints.None;
+        objectRB.constraints = oldRotationConstraints;
         objectRB.transform.position = holdPoint.position;
 
         if (currentlyHeldObject.NoThrow)
@@ -204,6 +226,14 @@ public class PickUpController : MonoBehaviour
             targetVelocity));
         LastPosition = holdPosition;
         RotateHeldObject();
+
+        float distance = Vector3.Distance(transform.position, objectRB.transform.position);
+        if(distance >= DropItemDistance)
+        {
+            DropObject();
+            return;
+        }
+
         // if(Vector3.Distance(holdPosition, currentlyHeldObject.transform.position) <= maxDistanceForMovement)
         // {
         //     currentlyHeldObject.transform.position = holdPosition;
