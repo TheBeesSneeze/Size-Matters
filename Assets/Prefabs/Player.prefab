@@ -859,14 +859,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2807889623892200252}
     m_Modifications:
-    - target: {fileID: 4449675141288409040, guid: 4702d3c18f2260d448c76784113c664c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5405253882506301987, guid: 4702d3c18f2260d448c76784113c664c, type: 3}
-      propertyPath: m_RaycastTarget
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5785965039783345966, guid: 4702d3c18f2260d448c76784113c664c, type: 3}
       propertyPath: m_Name
       value: Pause Menu
