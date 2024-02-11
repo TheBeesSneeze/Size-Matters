@@ -721,6 +721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InteractableObject (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 4334381704457707436, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: CanBePushed
       value: 1
@@ -3451,7 +3455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4910259825327321242, guid: 8ac9b7e9aa95f8b4d9ccba91e348d1ef, type: 3}
       propertyPath: m_Constraints
-      value: 14
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 5976855403237303749, guid: 8ac9b7e9aa95f8b4d9ccba91e348d1ef, type: 3}
       propertyPath: scaleX
@@ -6457,7 +6461,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7152997335724982141, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2031272610858065185, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
@@ -9362,7 +9366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4910259825327321242, guid: 8ac9b7e9aa95f8b4d9ccba91e348d1ef, type: 3}
       propertyPath: m_Constraints
-      value: 14
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 5976855403237303749, guid: 8ac9b7e9aa95f8b4d9ccba91e348d1ef, type: 3}
       propertyPath: scaleX
