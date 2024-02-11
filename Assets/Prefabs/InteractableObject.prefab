@@ -62,6 +62,7 @@ MonoBehaviour:
   scaleChangeRateMultiplier: 1
   scaleChangeSmoothingTime: 0.1
   CurrentSize: 1
+  PlayerLooking: 0
   scaleTarget: {x: 0, y: 0, z: 0}
 --- !u!114 &8060536073585198358
 MonoBehaviour:
@@ -126,7 +127,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6073f2b416127b408c7a4a77d0f480b, type: 2}
+  - {fileID: 2100000, guid: 54eb0a880c35ecd4fa56b3b6c33e8aaa, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
