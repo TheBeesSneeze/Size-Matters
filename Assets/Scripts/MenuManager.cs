@@ -38,7 +38,8 @@ public class MenuManager : MonoBehaviour
 
     public void GoToHub()
     {
-        Debug.LogWarning("not done");
+        Debug.LogWarning("not not done");
+        SceneManager.LoadScene("HubScene");
     }
 
     public void OnExitClick()
