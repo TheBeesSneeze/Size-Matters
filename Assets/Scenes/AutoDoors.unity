@@ -483,7 +483,7 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7152997335724982141, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 2031272610858065185, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3e8de446b7273fc4191e97741e63bf36, type: 3}
@@ -552,3 +552,64 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b687cd23426d568468fdfec09cd98ebd, type: 3}
+--- !u!1001 &500137900984084994
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.6091166
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.0879145
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204489362, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163776995204594866, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
+      propertyPath: m_Name
+      value: Pressure Plate Doors
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 749da61c4eac8dc4c985f3f2a98bfdb3, type: 3}
