@@ -3862,6 +3862,67 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1001 &702904920
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_RootOrder
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.5830483
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -90.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.3565564
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317318983410933777, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7157393593968715710, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
+      propertyPath: m_Name
+      value: Death Plane
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9e4ce44ab2329784daec3fc6cb2bd194, type: 3}
 --- !u!1001 &718865772
 PrefabInstance:
   m_ObjectHideFlags: 0
