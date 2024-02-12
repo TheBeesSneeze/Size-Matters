@@ -59,7 +59,7 @@ public class InputManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         };
-        
+        Application.targetFrameRate = 60;
     }
 
     private void Update()
