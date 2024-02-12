@@ -487,6 +487,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5893759699248712036, guid: 0ea88c2a2d1a5e647b8cec8d37fc75a5, type: 3}
+      propertyPath: OutputScene
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6059266570418092942, guid: 0ea88c2a2d1a5e647b8cec8d37fc75a5, type: 3}
       propertyPath: m_Name
       value: SceneDoor
@@ -41551,6 +41555,10 @@ PrefabInstance:
     - target: {fileID: 4334381704457707436, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Name
       value: InteractableObject (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: MaxPickUpSize
