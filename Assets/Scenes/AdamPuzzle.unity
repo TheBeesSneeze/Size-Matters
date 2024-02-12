@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeightErrorMargin
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: PressurePlateTriggered.m_PersistentCalls.m_Calls.Array.size
@@ -3876,7 +3876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeightErrorMargin
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: PressurePlateTriggered.m_PersistentCalls.m_Calls.Array.size
@@ -4095,7 +4095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeightErrorMargin
-      value: 0.75
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: PressurePlateTriggered.m_PersistentCalls.m_Calls.Array.size
