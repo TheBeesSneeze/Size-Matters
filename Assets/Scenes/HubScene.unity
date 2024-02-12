@@ -41448,6 +41448,10 @@ PrefabInstance:
       value: InteractableObject (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: MaxPickUpSize
       value: 5
       objectReference: {fileID: 0}
