@@ -23,6 +23,10 @@ public class SceneChanger : MonoBehaviour
     {
         string tag = collision.gameObject.tag;
 
+        string scene = SceneManager.GetActiveScene().name;
+
+        PlayerPrefs.SetInt(scene + "isDone", 1);
+
         if (tag.Equals("Player"))
         {
             if (OutputScene == Scene.Hub)
