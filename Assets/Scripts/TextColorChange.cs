@@ -7,8 +7,8 @@ public class TextColorChange : MonoBehaviour
 {
     public string LevelName;
     public TMP_Text LevelNumber;
-    public Color CompletedColor;
-    public Color ImcompleteColor;
+    public Color CompletedColor = Color.green;
+    public Color ImcompleteColor = Color.white;
 
     private void Start()
     {
