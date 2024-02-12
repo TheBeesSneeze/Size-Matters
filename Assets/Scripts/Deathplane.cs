@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 
 public class DeathPlane : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
         PlayerController player = collision.gameObject.GetComponent<PlayerController>();
         if(player != null)
