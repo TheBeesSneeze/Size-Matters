@@ -18146,7 +18146,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5893759699248712036, guid: 0ea88c2a2d1a5e647b8cec8d37fc75a5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -22281,6 +22282,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1325761553}
     m_Modifications:
+    - target: {fileID: 885425787980916676, guid: 17950cbc9c9003944a86fe3afab11843, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2162750038466847700, guid: 17950cbc9c9003944a86fe3afab11843, type: 3}
       propertyPath: m_Name
       value: Jaxson's Level Door (1)
