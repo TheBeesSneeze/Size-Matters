@@ -186,11 +186,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeight
-      value: 0.05
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeightErrorMargin
-      value: 0
+      value: 4.95
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: PressurePlateTriggered.m_PersistentCalls.m_Calls.Array.size
@@ -12338,6 +12338,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 2 Block Puzzle Cube
       objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7675912476114666917, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Constraints
       value: 122
@@ -12422,11 +12426,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeight
-      value: 0.05
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeightErrorMargin
-      value: 0
+      value: 4.95
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: PressurePlateTriggered.m_PersistentCalls.m_Calls.Array.size
@@ -28555,6 +28559,10 @@ PrefabInstance:
       value: 1 Block Puzzle Cube
       objectReference: {fileID: 0}
     - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: minScaleMultiplier
       value: 0.05
       objectReference: {fileID: 0}
@@ -28921,6 +28929,10 @@ PrefabInstance:
     - target: {fileID: 4334381704457707436, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Name
       value: 3 Block Puzzle Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7675912476114666917, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Constraints
@@ -55237,11 +55249,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeight
-      value: 0.05
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeightErrorMargin
-      value: 0
+      value: 4.95
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: PressurePlateTriggered.m_PersistentCalls.m_Calls.Array.size
@@ -58118,11 +58130,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeight
-      value: 0.05
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: TargetWeightErrorMargin
-      value: 0
+      value: 4.95
       objectReference: {fileID: 0}
     - target: {fileID: 4438066688802365772, guid: 9092f8aee90d8e544a3065f9b8a5cbf8, type: 3}
       propertyPath: PressurePlateTriggered.m_PersistentCalls.m_Calls.Array.size
@@ -58274,6 +58286,10 @@ PrefabInstance:
     - target: {fileID: 4334381704457707436, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Name
       value: Starting Cube
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920734548896669593, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
+      propertyPath: NoThrow
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7675912476114666917, guid: ba0b4eaa5d280724aaf7ff58bbe5798c, type: 3}
       propertyPath: m_Constraints
