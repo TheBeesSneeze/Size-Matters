@@ -83,12 +83,6 @@ public class CrosshairManager : MonoBehaviour
     {
         float distance = Vector3.Distance(cam.position, lookingObject.transform.position);
 
-        if (InputManager.Instance.PickUpPressed())
-        {
-            Crosshair = Mode.X;
-            return;
-        }
-
         if (CheckIfCanPickup())
         {
             Crosshair = Mode.Hand;
@@ -131,6 +125,14 @@ public class CrosshairManager : MonoBehaviour
         return false;
     }
 
+    private void Update()
+    {
+        if(Crosshair == Mode.X && !InputManager.Instance.PickUpPressed() && lookingObject==null)
+        {
+            Crosshair = Mode.Empty ;
+        }
+    }
+
 
     private void Awake()
     {
@@ -142,8 +144,6 @@ public class CrosshairManager : MonoBehaviour
         {
             Destroy(this);
         }
-
-        
     }
     private void Start()
     {
