@@ -270,7 +270,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 2491600498450484434}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
@@ -354,7 +354,7 @@ Transform:
   - {fileID: 7464184643980326313}
   - {fileID: 7397469808597979797}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &6570968697160916172
 CharacterController:
