@@ -40,6 +40,7 @@ public class MenuManager : MonoBehaviour
     {
         Debug.LogWarning("not not done");
         SceneManager.LoadScene("HubScene");
+        InputManager.Instance.Unpause();
     }
 
     public void OnExitClick()
